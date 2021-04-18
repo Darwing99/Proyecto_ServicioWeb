@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html >
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicio web</title>  
+    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/mdb.min.css">
+    <link rel="stylesheet" href="../css/style.css" />
+
+  
+   
+</head>
+<body>
+  <header>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+      <a class="navbar-brand" href="../index.html">
+        <img src="../img/logo.svg" height="100" alt="mdb logo">
+      </a>
+      <div class="container">
+
+  
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <!-- Left -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a href="users.html" class="nav-link waves-effect" >Users</a>
+              </li>
+              <li class="nav-item">
+                <a  href="location.html"class="nav-link waves-effect"  >Location</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link waves-effect" >Billing</a>
+              </li>
+           
+            
+          </ul>
+ 
+          <!-- Right -->
+        
+
+        </div>
+
+      </div>
+    </nav>
+  </header>
+<!-- Purple Header -->
+    <div class="edge-header morpheus-den-gradient"></div>
+    <div class="container d-flex justify-content-center free-bird">
+      <div class="row  col-lg-8  ">
+          <div class="col-md-12 d-flex justify-content-center col-lg-12 mx-auto float-none white z-depth-1 py-2 px-2">
+  
+  
+              <div class="container  p-3 my-3">
+  
+                  <section>
+                    <div class="form-elegant">
+                      <div class="modal-header text-center">
+                        <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>Billing</strong></h3>
+                      </div>
+                      
+                      <form method="POST" class="modal-body mx-4">
+                        <!--Body-->
+                        <div class="md-form mb-5">
+                          <input type="email" id="Form-descripcion" class="form-control validate">
+                          <label data-error="wrong" data-success="right" for="Form-descripcion">Descripcion</label>
+                        </div>
+                        <div class="md-form mb-5">
+                            <select id="selectusuario" class="mdb-select md-form" searchable="Search here.. ">
+                                <option value="" disabled selected>Usuario</option>
+                             
+                              </select>
+                        </div>
+                        <div class="md-form mb-5">
+                          <input type="text" id="Form-debit" class="form-control validate">
+                          <label data-error="wrong" data-success="right" for="Form-debit">Debit</label>
+                        </div>
+                        <div class="md-form mb-5">
+                          <input type="text" id="Form-credit" class="form-control validate">
+                          <label data-error="wrong" data-success="right" for="Form-credit">Credit</label>
+                        </div>
+                        <div class="md-form mb-5">
+                          <input type="date" id="Form-date" class="form-control validate">
+                          <label data-error="wrong" data-success="right" for="Form-date">Date</label>
+                        </div>
+                        
+                
+                
+                        <div class="text-center mb-3">
+                          <a type="button" id="guardarBilling" class="btn btn-info btn-md ml-0" >Guardar</a>
+                          <a id="obtenerlista" type="button" class="btn btn-info btn-md ml-0"  data-toggle="modal" data-target="#centralModalSuccess" >Ver Lista</a>
+                        </div>
+                      
+                 
+                      </form>
+                     
+                  
+                    </div>
+                    </section>
+                  </section>
+               
+    
+                </div>
+  
+          </div>
+        </div>
+          
+      
+      </div>
+
+
+       <!-- Central Modal Medium Success -->
+ <div class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+ aria-hidden="true">
+ <div class="modal-dialog modal-lg" role="document">
+   <!--Content-->
+   <div class="modal-content">
+     <!--Header-->
+     <div class="modal-header">
+       <p class="heading lead">Billing</p>
+
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true" class="white-text">&times;</span>
+       </button>
+     </div>
+
+     <!--Body-->
+     <div class="modal-body">
+       <div class="text-center">
+        <table id="tabla" class="table table-responsive-md mb-0">
+            <thead>
+              <tr>
+                <th>
+                  <strong>Id</strong>
+                </th>
+                <th>
+                  <strong>description</strong>
+                </th>
+                <th>
+                  <strong>idUser</strong>
+                </th>
+                <th>
+                  <strong>debt</strong>
+                </th>
+                <th>
+                    <strong>credit</strong>
+                  </th>
+                  <th>
+                    <strong>Action</strong>
+                  </th>
+              </tr>
+            </thead>
+            <tbody>
+           
+            </tbody>
+          </table>
+        
+
+
+       </div>
+     </div>
+
+     <!--Footer-->
+     <div class="modal-footer justify-content-center">
+     
+       <a type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Close</a>
+     </div>
+   </div>
+   <!--/.Content-->
+ </div>
+</div>
+  
+<footer class="page-footer font-small white lighten-3 pt-4 py-4 dark-grey-text">
+
+  <!-- Footer Elements -->
+  <div class="container">
+
+    <div class="row">
+    
+      <div class="col-md-8">
+        <!-- Copyright -->
+        <div class="footer-copyright text-right bg-transparent dark-grey-text mt-2">© 2021.
+          <a class="dark-grey-text" href="mailto:darwing01000100@gmail.com"> All rights reserved.</a>
+        </div>
+        <!-- Copyright -->
+      </div>
+    </div>
+
+  </div>
+  <!-- Footer Elements -->
+
+</footer>
+
+<script  src="../js/popper.min.js"></script> 
+<script  src="../js/bootstrap.min.js"></script>
+<script  src="../js/mdb.min.js"></script>
+<script src="../js/api.js"></script>
+<script>
+    $(document).ready(function() {
+$('.mdb-select').materialSelect();
+});
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+</html>
