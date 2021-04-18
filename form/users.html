@@ -58,32 +58,61 @@
     <div class="edge-header morpheus-den-gradient"></div>
     <!-- Main Container -->
     <div class="container d-flex justify-content-center free-bird">
-    <div class="row  col-lg-8  ">
+    <div class="row  col-lg-12  ">
         <div class="col-md-12 d-flex justify-content-center col-lg-12 mx-auto float-none white z-depth-1 py-2 px-2">
             <div class="container  p-3 my-3">
-                <section>
+                <section class="justify-content-center">
                   <div class="form-elegant">
                     <div class="modal-header text-center">
                       <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>New User</strong></h3>
                     </div>
                     <form method="POST" id="register" class="modal-body mx-4">
-                      <div class="md-form mb-5">
+                      <div class="md-form mb-3">
                         <input type="text" id="Form-name" name="name" class="form-control validate" required>
                         <label data-error="wrong"  data-success="right" for="Form-name">name</label>
                       </div>
-                      <div class="md-form mb-5">
+                      <div class="md-form mb-3">
                         <select id="location" name="location" class="mdb-select md-form" searchable="Search here.." required>
                             <option value="" disabled selected>Location</option>
                           
                           </select>
                       </div>
-                      <div class="text-center mb-3">
-                        <button type="button" id="guardarUser" value="guardar" class="btn btn-info btn-md ml-0" >Guardar</button>
-                        <a id="obtenerusuarios" type="button" class="btn btn-info btn-md ml-0"  data-toggle="modal" data-target="#centralModalSuccess" >Ver Lista</a>
+                      <div class="mb-3">
+                        <button type="button" id="guardarUser" value="guardar" class="btn btn-dark btn-md ml-0" >Guardar</button>
+                        <a id="obtenerusuarios" type="button" class="btn btn-dark btn-md ml-0" ><i class="far fa-eye"></i></a>
                        
                       </div>
                     </form>
                   </div>
+
+                  <div class="lista text-center">
+                    <table id="tablauser" class="table table-responsive-md mb-0">
+                        <thead>
+                          <tr>
+                            <th>
+                              <strong>Id</strong>
+                            </th>
+                            <th>
+                              <strong>Users</strong>
+                            </th>
+                            <th>
+                             <strong>location</strong>
+                           </th>
+                         
+                          
+                              <th>
+                                <strong>Action</strong>
+                              </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                       
+                        </tbody>
+                      </table>
+                    
+             
+             
+                   </div>
                 </section>
               </div>
         </div>
@@ -92,62 +121,8 @@
     </div>
 
 
-<!-- Central Modal Medium Success -->
-<div class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-aria-hidden="true">
-<div class="modal-dialog modal-lg" role="document">
-  <!--Content-->
-  <div class="modal-content">
-    <!--Header-->
-    <div class="modal-header">
-      <p class="heading lead">Usuario</p>
 
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true" class="white-text">&times;</span>
-      </button>
-    </div>
-
-    <!--Body-->
-    <div class="modal-body">
-      <div class="text-center">
-       <table id="tablauser" class="table table-responsive-md mb-0">
-           <thead>
-             <tr>
-               <th>
-                 <strong>Id</strong>
-               </th>
-               <th>
-                 <strong>Users</strong>
-               </th>
-               <th>
-                <strong>location</strong>
-              </th>
-            
-             
-                 <th>
-                   <strong>Action</strong>
-                 </th>
-             </tr>
-           </thead>
-           <tbody>
-          
-           </tbody>
-         </table>
-       
-
-
-      </div>
-    </div>
-
-    <!--Footer-->
-    <div class="modal-footer justify-content-center">
-    
-      <a type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Close</a>
-    </div>
-  </div>
-  <!--/.Content-->
-</div>
-</div>
+   
 <footer class="page-footer font-small white lighten-3 pt-4 py-4 dark-grey-text">
 
   <!-- Footer Elements -->
@@ -174,6 +149,7 @@ aria-hidden="true">
     <script  src="../js/popper.min.js"></script> 
     <script  src="../js/bootstrap.min.js"></script>
     <script  src="../js/mdb.min.js"></script>
+    <script  src="../js/funciones.js"></script>
     <script  src="../js/api.js"></script>
   
     <script>

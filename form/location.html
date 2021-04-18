@@ -63,19 +63,21 @@
   
     <!-- Main Container -->
     <div class="container d-flex justify-content-center free-bird">
-      <div class="row  col-lg-8  ">
-          <div class="col-md-12 d-flex justify-content-center col-lg-12 mx-auto float-none white z-depth-1 py-2 px-2">
+      <div class="row  col-lg-12  ">
+          <div class="col-md-12 d-flex justify-content-center col-lg-12 mx-auto float-none white  z-depth-1  py-2 px-2">
   
         
               <div class="container  p-3 my-3">
-                  <form method="POST" >
-                  <section>
+                 
+                  <section> 
+                  
                     <div class="form-elegant">
                       <!--Header-->
                       <div class="modal-header text-center">
                         <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>Location</strong></h3>
                       </div>
                       <!--Body-->
+                      <form method="POST" >
                       <div class="modal-body mx-4">
                         <!--Body-->
                         <div class="md-form mb-5">
@@ -83,22 +85,45 @@
                           <label data-error="wrong" data-success="right"   for="location">Location</label>
                         </div>
             
-                        <div class="text-center mb-3">
-                          <button type="button" data-toggle="modal" id="guardarLocation" class="btn btn-info btn-md ml-0" >Guardar</button>
-                          <a id="obtenerlocation" type="button" class="btn btn-info btn-md ml-0"  data-toggle="modal" data-target="#centralModalSuccess" >Ver Lista</a>
+                        <div class=" mb-3">
+                          <button type="button" data-toggle="modal" id="guardarLocation" class="btn btn-dark btn-md ml-0" >Guardar</button>
+                          <a id="obtenerdireccion" type="button" class="btn btn-dark btn-md ml-0" ><i class="far fa-eye"></i></a>
                        
                         
                         </div>
                     
                       </div>
-                  
+                     </form>
                     </div>
   
                
             
-                   
+                  <div class="listadireccion text-center">
+                    <table id="tablalocation" class="table table-responsive-md mb-0">
+                        <thead>
+                          <tr>
+                            <th>
+                              <strong>Id</strong>
+                            </th>
+                            <th>
+                              <strong>Location</strong>
+                            </th>
+                          
+                              <th>
+                                <strong>Action</strong>
+                              </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                       
+                        </tbody>
+                      </table>
+                    
+            
+            
+                   </div>
                   </section>
-                </form>
+             
     
                 </div>
   
@@ -108,58 +133,7 @@
       
       </div>
 <!-- /.Main Container -->
-    <!-- Central Modal Medium Success -->
-    <div class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <!--Content-->
-      <div class="modal-content">
-        <!--Header-->
-        <div class="modal-header">
-          <p class="heading lead">Location</p>
    
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true" class="white-text">&times;</span>
-          </button>
-        </div>
-   
-        <!--Body-->
-        <div class="modal-body">
-          <div class="text-center">
-           <table id="tablalocation" class="table table-responsive-md mb-0">
-               <thead>
-                 <tr>
-                   <th>
-                     <strong>Id</strong>
-                   </th>
-                   <th>
-                     <strong>Location</strong>
-                   </th>
-                 
-                     <th>
-                       <strong>Action</strong>
-                     </th>
-                 </tr>
-               </thead>
-               <tbody>
-              
-               </tbody>
-             </table>
-           
-   
-   
-          </div>
-        </div>
-   
-        <!--Footer-->
-        <div class="modal-footer justify-content-center">
-        
-          <a type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Close</a>
-        </div>
-      </div>
-      <!--/.Content-->
-    </div>
-   </div>
 <footer class="page-footer font-small white lighten-3 pt-4 py-4 dark-grey-text">
 
   <!-- Footer Elements -->
@@ -182,11 +156,14 @@
    
 </footer>
     <script  src="../js/popper.min.js"></script> 
-    <script  src="../js/funciones.js"></script>
     <script  src="../js/mdb.min.js"></script>
     <script  src="../js/bootstrap.min.js"></script>
+    <script  src="../js/funciones.js"></script>
     <script src="../js/api.js"></script>
-
+    <script>
+      $(document).ready(function() {
+  $('.mdb-select').materialSelect();
+  });</script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>

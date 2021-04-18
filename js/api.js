@@ -261,7 +261,6 @@ $("#guardarLocation").click('submit', function(e){
 
 //Delete users
 
-
 $(document).on("click", ".eliminar", function(e){	 
     e.preventDefault();	        
     fila = $(this).closest("tr");	
