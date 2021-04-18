@@ -33,7 +33,7 @@ $(document).ready(function () {
             "<td>"+ item.debt+"</td>"+
             "<td>"+ item.credit +"</td>"+
             "<td>" +
-            "<td>   <a  class='btn btn-success btn-rounded btn-md ml-md-0'>Edit</a>"+
+            "<td>   <a  class='btn btn-success btn-rounded btn-md ml-md-0'><i class='fas fa-edit'></i></a>"+
             " <a  class='btn btn-primary btn-rounded btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>"+
             "</tr>";
         $('#tabla> tbody').append(rows);
@@ -65,8 +65,8 @@ $(document).ready(function () {
             var rows ="<tr>"+
             "<td>"+item.id+"</td>"+
             "<td>"+ item.location+"</td>"+
-            "<td> <a class='btn btn-success btn-rounded btn-md ml-md-0'>Edit</a>"+
-            " <a  class='btn btn-primary btn-rounded btn-md ml-md-0'>Delete</a></td>"+
+            "<td>   <a  class='btn btn-success btn-rounded btn-md ml-md-0'><i class='fas fa-edit'></i></a>"+
+            " <a  class='btn btn-primary btn-rounded btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>"+
             "</tr>";
         $('#tablalocation> tbody').append(rows);
         });
@@ -153,8 +153,8 @@ $(document).ready(function () {
             "<td>"+item.id+"</td>"+
             "<td>"+ item.name+"</td>"+
             "<td>"+ item.location+"</td>"+
-            "<td>   <a  class='btn btn-success btn-rounded btn-md ml-md-0'>Edit</a>"+
-            " <a  class='btn btn-primary btn-rounded btn-md ml-md-0'>Delete</a></td>"+
+            "<td>   <a  class='btn btn-success btn-rounded btn-md ml-md-0'><i class='fas fa-edit'></i></a>"+
+            " <button type='button' class='eliminar btn btn-primary btn-rounded btn-md ml-md-0'><i class='fas fa-trash'></i></button></td>"+
             "</tr>";
         $('#tablauser> tbody').append(rows);
         });
@@ -202,35 +202,6 @@ $("#guardarUser").click('submit', function(e){
 });
 
 
-//Guardar Usuarios
-// $("#guardarBilling").click('submit', function(e){
-  
-//     e.preventDefault();
-//     var codigo=null;
-//     var name = document.getElementById('Form-name').value;	
-// 	var location=document.getElementById('location').value;
-
-//     $.ajax({
-//         headers: { 'Accept': 'application/json',
-//             'Content-Type': 'application/json' 
-//         },
-//         'type': 'POST',
-//         'url':  urlBillin,
-//         'data': JSON.stringify({
-//             'id':codigo,
-//             'name':name,
-//             'location':location
-//           }),
-//         'dataType':'json',
-//         'success': function(data) {
-//          alert('Has enviado los datos');
-//         },
-//         'error': function(jqXHR, textStatus, errorThrown) {
-//             alert(' Error in processing!');
-//         }
-//     });
-
-// });
 
 //Guardar location
 $("#guardarLocation").click('submit', function(e){
@@ -260,31 +231,61 @@ $("#guardarLocation").click('submit', function(e){
 
 });
 
-//Guardar location
-$("#guardarBilling").click('submit', function(e){
+// //Guardar billin
+// $("#guardarBilling").click('submit', function(e){
   
-    e.preventDefault();
-    var codigo=null;
-	var location=document.getElementById('location').value;
+//     e.preventDefault();
+//     var codigo=null;
+// 	var location=document.getElementById('location').value;
 
-    $.ajax({
-        headers: { 'Accept': 'application/json',
-            'Content-Type': 'application/json' 
-        },
-        'type': 'POST',
-        'url':  urlLocation,
-        'data': JSON.stringify({
-            'id':codigo,
-            'location':location
-          }),
-        'dataType':'json',
-        'success': function(data) {
-         alert('Has enviado los datos');
-        },
-        'error': function(jqXHR, textStatus, errorThrown) {
-            alert(' Error in processing!');
-        }
-    });
+//     $.ajax({
+//         headers: { 'Accept': 'application/json',
+//             'Content-Type': 'application/json' 
+//         },
+//         'type': 'POST',
+//         'url':  urlLocation,
+//         'data': JSON.stringify({
+//             'id':codigo,
+//             'location':location
+//           }),
+//         'dataType':'json',
+//         'success': function(data) {
+//          alert('Has enviado los datos');
+//         },
+//         'error': function(jqXHR, textStatus, errorThrown) {
+//             alert(' Error in processing!');
+//         }
+//     });
 
-});
+// });
+
+//Delete users
+
+
+$(document).on("click", ".eliminar", function(e){	 
+    e.preventDefault();	        
+    fila = $(this).closest("tr");	
+    var codigo = parseInt(fila.find('td:eq(0)').text()); //capturo el ID
+    $.support.cors = true;
+        $.ajax({
+            type: 'DELETE',
+            url:  urlUser,
+            data: JSON.stringify({ 'id':codigo}),
+            datatype:'json',
+            credentials: 'include',
+    
+            success: function(data) {
+                alert('Registro Eliminado');
+            },
+            error:function(error){
+                alert(codigo);
+            }
+    
+        });
+        
+    
+    })
+
+
+
 
