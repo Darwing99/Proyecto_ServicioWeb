@@ -3,7 +3,7 @@
 .navbar .navbar-brand img {
     height: 20px;
   }
-.lista,.listabilling,.listadireccion{
+.lista,.listabilling,.listadireccion,#updateUser{
   display: none;
 }
   .navbar .navbar-brand {

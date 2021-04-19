@@ -64,6 +64,7 @@
                       <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>New User</strong></h3>
                     </div>
                     <form method="POST" id="register" class="modal-body mx-4">
+                      <input type="hidden" id="id" name="id" >
                       <div class="md-form mb-3">
                         <input type="text" id="Form-name" name="name" class="form-control validate" required>
                         <label data-error="wrong"  data-success="right" for="Form-name">name</label>
@@ -75,7 +76,8 @@
                           </select>
                       </div>
                       <div class="mb-3">
-                        <button type="button" id="guardarUser" value="guardar" class="btn btn-dark btn-md ml-0" >Guardar</button>
+                        <button type="button" id="guardarUser"  class="btn btn-dark btn-md ml-0" >Guardar</button>
+                        <button type="button" id="updateUser"  class=" btn btn-dark btn-md ml-0" >Actualizar</button>
                         <a id="obtenerusuarios" type="button" class="btn btn-dark btn-md ml-0" ><i class="far fa-eye"></i></a>
                        
                       </div>
@@ -107,7 +109,7 @@
                         </tbody>
                       </table>
                     
-             
+            
              
                    </div>
                 </section>
