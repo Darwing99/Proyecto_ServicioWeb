@@ -23,7 +23,7 @@ $(document).ready(function () {
         credentials: 'include',
 
         success: function (data) {
-        $('#tabla > tbody').empty();
+            $('.loader-billing').css('display','none');
             $.each(data, function (i, item) {
            
             var rows ="<tr>"+
@@ -58,7 +58,7 @@ $(document).ready(function () {
         datatype:'json',
         credentials: 'include',
         success: function (data) {
-      
+            $('.loader-location').css('display','none');
             $.each(data, function (i, item) {
            
             var rows ="<tr>"+
@@ -145,7 +145,8 @@ $(document).ready(function () {
         credentials: 'include',
 
         success: function (data) {
-        $('#tablauser > tbody').empty();
+            $('.loader-users').css('display','none');
+     
             $.each(data, function (i, item) {
            
             var rows ="<tr>"+
