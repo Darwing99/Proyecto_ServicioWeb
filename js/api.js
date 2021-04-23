@@ -32,7 +32,6 @@ $(document).ready(function () {
             "<td>"+ item.idUser+"</td>"+
             "<td>"+ item.debt+"</td>"+
             "<td>"+ item.credit +"</td>"+
-            "<td>"+ item.date +"</td>"+
             "<td>   <a  class='btn btn-success btn-rounded btn-md ml-md-0'><i class='fas fa-edit'></i></a>"+
             " <a  class='btn btn-primary btn-rounded btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>"+
             "</tr>";
@@ -276,8 +275,8 @@ $("#guardarBilling").click('submit', function(e){
     var codigo=null;
 	var description=document.getElementById('Form-descripcion').value;
     var idusuario=document.getElementById('selectusuario').value;
-    var debit=(document.getElementById('Form-debit').value);
-    var credit=(document.getElementById('Form-credit').value);
+    var debit=parseFloat(document.getElementById('Form-debit').value);
+    var credit=parseFloat(document.getElementById('Form-credit').value);
     var date=document.getElementById('Form-date').value;
   
 
