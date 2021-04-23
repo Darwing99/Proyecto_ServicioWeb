@@ -154,7 +154,7 @@ $(document).ready(async(e)=> {
             "<td>"+ item.name+"</td>"+
             "<td>"+ item.location+"</td>"+
             "<td>   <a  class='editar btn btn-success btn-rounded btn-md ml-md-0'><i class='fas fa-edit'></i></a>"+
-            " <button type='button' class='eliminar btn btn-primary btn-rounded btn-md ml-md-0'><i class='fas fa-trash'></i></button></td>"+
+            " <button type='button' class='eliminar btn btn-danger btn-rounded btn-md ml-md-0'><i class='fas fa-trash'></i></button></td>"+
             "</tr>";
         $('#tablauser> tbody').append(rows);
         });
@@ -321,8 +321,8 @@ $("#guardarBilling").click('submit', function(e){
 
 });
 
-//Delete users
-$(document).on("click", ".editar", function(e){	 
+
+$(document).on("click", ".eliminar", function(e){	 
     e.preventDefault();	        
     fila = $(this).closest("tr");	
     var codigo = parseInt(fila.find('td:eq(0)').text()); //capturo el ID
@@ -332,10 +332,37 @@ $(document).on("click", ".editar", function(e){
     document.getElementById('Form-name').value=name;
     document.getElementById('Form-name').focus();
     document.getElementById('location').selectedIndex=location;
-    $("#guardarUser").css("display","none");
-    $("#updateUser").css("display","block");
+    // $("#guardarUser").css("display","none");
+    // $("#updateUser").css("display","block");
+
+
+    swal({
+        title: "Eliminar Registro?",
+        text: "Desea eliminar a "+name+"?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((ok) => {
+        if (ok) {
+            $.ajax({
+                url:urlUser,
+                type:"DELETE",
+                data:{id:codigo},
+                success: function(res){
+                    console.log(res);
+                }
+            }).then((ok)=>{
+                swal("El registro ha sido eliminado", {
+            icon: "success",
+          });
+            })
+         
+        }
+      });
 
     })
+
 
 
 
