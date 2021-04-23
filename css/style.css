@@ -33,14 +33,14 @@
 
 .form-elegant .modal-header {
     border-bottom: none; }
-
+.loader-users,.loader-location,.loader-billing{
+  display: none;
+}
 .modal-dialog .form-elegant .btn .fab {
     color: #2196f3!important; }
 
 .form-elegant .modal-body, .form-elegant .modal-footer {
     font-weight: 400; }
-
-
 
 
     .sk-cube-grid {

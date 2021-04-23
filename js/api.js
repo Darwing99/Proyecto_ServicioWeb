@@ -11,15 +11,14 @@ if(x) x.onreadystatechange=function(){
 };
 
 //Mostrar datos billing en la tabla
-$(document).ready(async(e)=>{
-
+$('#obtenerlista').click(async(e)=>{
+    $('.loader-billing').css('display','block');
     $.support.cors = true;
    $.ajax({
         type: "GET",
         url:urlBillin,
         datatype:'json',
         credentials: 'include',
-
         success: function (data) {
             $('.loader-billing').css('display','none');
             $('.listabilling').css('display','block');
@@ -40,6 +39,7 @@ $(document).ready(async(e)=>{
         },
             failure: function (data) {
             console.log(data.responseText);
+        
         },
             error: function (data) {
             console.log(data.responseText);
@@ -48,9 +48,10 @@ $(document).ready(async(e)=>{
 });
 
 //Mostrar datos de direcciones en tabla
-$(document).ready(async(e)=> {
-
+$('#obtenerdireccion').click(async(e)=> {
+    $('.loader-location').css('display','block');
     $.support.cors = true;
+
    $.ajax({
         type: "GET",
         url: urlLocation,
@@ -70,11 +71,9 @@ $(document).ready(async(e)=> {
         $('#tablalocation> tbody').append(rows);
         });
             console.log(data);
-        },
-            failure: function (data) {
+        },failure: function (data) {
             console.log(data.responseText);
-        },
-            error: function (data) {
+        }, error: function (data) {
             console.log(data.responseText);
         }
      });
@@ -133,8 +132,8 @@ $(document).ready(async(e)=> {
 });
 
 //mandar datos a la tabla de users
-$(document).ready(async(e)=> {
-
+$('#obtenerusuarios').click(async(e)=> {
+    $('.loader-users').css('display','block');
     $.support.cors = true;
    $.ajax({
         type: "GET",
@@ -289,7 +288,6 @@ $("#guardarBilling").click('submit', function(e){
     var idusuario=document.getElementById('selectusuario').value;
     var debit=parseFloat(document.getElementById('Form-debit').value);
     var credit=parseFloat(document.getElementById('Form-credit').value);
-    var date=document.getElementById('Form-date').value;
   if(description=="" || idusuario=="" || debit=="" || credit==""){
       alert("ampos Vacios");
 
