@@ -10,10 +10,8 @@ if(x) x.onreadystatechange=function(){
     }
 };
 
-
-
 //Mostrar datos billing en la tabla
-$(document).ready(function () {
+$(document).ready(async(e)=>{
 
     $.support.cors = true;
    $.ajax({
@@ -50,7 +48,7 @@ $(document).ready(function () {
 });
 
 //Mostrar datos de direcciones en tabla
-$(document).ready(function () {
+$(document).ready(async(e)=> {
 
     $.support.cors = true;
    $.ajax({
@@ -85,7 +83,7 @@ $(document).ready(function () {
 
 //select de formulario users
 
-$(document).ready(function () {
+$(document).ready(async(e)=> {
     $.support.cors = true;
    $.ajax({
         type: "GET",
@@ -135,7 +133,7 @@ $(document).ready(function () {
 });
 
 //mandar datos a la tabla de users
-$(document).ready(function () {
+$(document).ready(async(e)=> {
 
     $.support.cors = true;
    $.ajax({
@@ -175,33 +173,41 @@ $(document).ready(function () {
 ///Guardar usuarios
 
 $("#guardarUser").click('submit', function(e){
+
+
   
     e.preventDefault();
     var codigo=null;
-    var name = document.getElementById('Form-name').value;	
-   
+    var name = document.getElementById('Form-name').value;	   
 	var location=document.getElementById('location').value;
-    $.ajax({
-        headers: { 'Accept': 'application/json',
-            'Content-Type': 'application/json' 
-        },
-        'type': 'POST',
-        'url':  urlUser,
-        'data': JSON.stringify({
-            'id':codigo,
-            'name':name,
-            'location':location
-          }),
-        'dataType':'json',
-        'success': function(data) {
-         alert('Has enviado los datos');
-        },
-        'error': function(jqXHR, textStatus, errorThrown) {
-            alert(' Error in processing!');
-        }
-    });
 
-    
+    if(name=="" || Location==""){
+        alert("Campos vacios");
+        return true;
+
+    }else{
+        $.ajax({
+            headers: { 'Accept': 'application/json',
+                'Content-Type': 'application/json' 
+            },
+            'type': 'POST',
+            'url':  urlUser,
+            'data': JSON.stringify({
+                'id':codigo,
+                'name':name,
+                'location':location
+              }),
+            'dataType':'json',
+            'success': function(data) {
+             alert('Has enviado los datos');
+            },
+            'error': function(jqXHR, textStatus, errorThrown) {
+                alert(' Error in processing!');
+            }
+        });
+    }
+
+  
 
 });
 
@@ -246,25 +252,31 @@ $("#guardarLocation").click('submit', function(e){
     e.preventDefault();
     var codigo=null;
 	var location=document.getElementById('location').value;
+    if(location==""){
+        alert("Campos vacios");
+        return true;
 
-    $.ajax({
-        headers: { 'Accept': 'application/json',
-            'Content-Type': 'application/json' 
-        },
-        'type': 'POST',
-        'url':  urlLocation,
-        'data': JSON.stringify({
-            'id':codigo,
-            'location':location
-          }),
-        'dataType':'json',
-        'success': function(data) {
-         alert('Has enviado los datos');
-        },
-        'error': function(jqXHR, textStatus, errorThrown) {
-            alert(' Error in processing!');
-        }
-    });
+    }else{
+        $.ajax({
+            headers: { 'Accept': 'application/json',
+                'Content-Type': 'application/json' 
+            },
+            'type': 'POST',
+            'url':  urlLocation,
+            'data': JSON.stringify({
+                'id':codigo,
+                'location':location
+              }),
+            'dataType':'json',
+            'success': function(data) {
+             alert('Has enviado los datos');
+            },
+            'error': function(jqXHR, textStatus, errorThrown) {
+                alert(' Error in processing!');
+            }
+        });
+    
+    }
 
 });
 
@@ -278,8 +290,11 @@ $("#guardarBilling").click('submit', function(e){
     var debit=parseFloat(document.getElementById('Form-debit').value);
     var credit=parseFloat(document.getElementById('Form-credit').value);
     var date=document.getElementById('Form-date').value;
-  
+  if(description=="" || idusuario=="" || debit=="" || credit==""){
+      alert("ampos Vacios");
 
+  }else{
+      
     $.ajax({
         headers: { 'Accept': 'application/json',
             'Content-Type': 'application/json' 
@@ -301,11 +316,12 @@ $("#guardarBilling").click('submit', function(e){
             alert(' Error in processing!');
         }
     });
+  }
+
 
 });
 
 //Delete users
-
 $(document).on("click", ".editar", function(e){	 
     e.preventDefault();	        
     fila = $(this).closest("tr");	
