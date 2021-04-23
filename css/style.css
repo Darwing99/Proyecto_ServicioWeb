@@ -3,13 +3,14 @@
 .navbar .navbar-brand img {
     height: 20px;
   }
-.lista,.listabilling,.listadireccion,#updateUser{
-  display: block;
+.lista,.listabilling,.listadireccion{
+  display: none;
 }
   .navbar .navbar-brand {
     padding-top: 0;
   }
 
+ 
   .navbar .nav-link {
     color: #444343!important;
   }

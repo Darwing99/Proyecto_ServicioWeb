@@ -24,6 +24,7 @@ $(document).ready(function () {
 
         success: function (data) {
             $('.loader-billing').css('display','none');
+            $('.listabilling').css('display','block');
             $.each(data, function (i, item) {
            
             var rows ="<tr>"+
@@ -59,13 +60,14 @@ $(document).ready(function () {
         credentials: 'include',
         success: function (data) {
             $('.loader-location').css('display','none');
+            $('.listadireccion').css('display','block');
             $.each(data, function (i, item) {
            
             var rows ="<tr>"+
             "<td>"+item.id+"</td>"+
             "<td>"+ item.location+"</td>"+
-            "<td>   <a  class='btn btn-success btn-rounded btn-md ml-md-0'><i class='fas fa-edit'></i></a>"+
-            " <a  class='btn btn-primary btn-rounded btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>"+
+            "<td><a  class='btn btn-success btn-rounded btn-md ml-md-0'><i class='fas fa-edit'></i></a>"+
+            "<a class='btn btn-primary btn-rounded btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>"+
             "</tr>";
         $('#tablalocation> tbody').append(rows);
         });
@@ -79,8 +81,6 @@ $(document).ready(function () {
         }
      });
 });
-
-
 
 
 //select de formulario users
@@ -145,7 +145,9 @@ $(document).ready(function () {
         credentials: 'include',
 
         success: function (data) {
+            
             $('.loader-users').css('display','none');
+            $('.lista').css('display','block');
      
             $.each(data, function (i, item) {
            
@@ -234,9 +236,6 @@ $("#updateUser").click('submit', function(e){
             console.log(JSON.stringify(data));
         }
     });
-
-    
-
 });
 
 
@@ -285,6 +284,7 @@ $("#guardarBilling").click('submit', function(e){
         headers: { 'Accept': 'application/json',
             'Content-Type': 'application/json' 
         },
+
         'type': 'POST',
         'url':  urlBillin,
         'data': JSON.stringify({'id': codigo,
