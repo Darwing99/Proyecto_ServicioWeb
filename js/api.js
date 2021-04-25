@@ -1,6 +1,27 @@
 const urlUser = 'https://fierce-fortress-79578.herokuapp.com/api/userAccount';
 const urlLocation="https://fierce-fortress-79578.herokuapp.com/api/location";
 const urlBillin="https://fierce-fortress-79578.herokuapp.com/api/billing";
+
+
+const urlInsertPyb="http://pythoncc.herokuapp.com/python/insert/billing/";
+const urlInsertPya="http://pythoncc.herokuapp.com/python/insert/user/account/";
+const urlInsertPyl="http://pythoncc.herokuapp.com/python/insert/location/";
+const urlUpdatePyb="http://pythoncc.herokuapp.com/python/update/billing/";
+const urlUpdatePya="http://pythoncc.herokuapp.com/python/update/user/account/";
+const urlUpdatePyl="http://pythoncc.herokuapp.com/python/update/location";
+const urlDeletePyb="http://pythoncc.herokuapp.com/python/delete/billing/";
+const urlDeletePya="http://pythoncc.herokuapp.com/python/delete/user/account/";
+const urlDeletePyl="http://pythoncc.herokuapp.com/python/delete/location/";
+
+const urlReadyPHPb="https://apiweb12.herokuapp.com/api/billing/read.php";
+const urlReadyPHPl="https://apiweb12.herokuapp.com/api/location/read.php";
+const urlReadyPHPa="https://apiweb12.herokuapp.com/api/user/read.php";
+const urlInsertPHPb="https://apiweb12.herokuapp.com/api/billing/create.php";
+
+const urlInsertPHPl="https://apiweb12.herokuapp.com/api/location/create.php";
+const urlInsertPHPa="https://apiweb12.herokuapp.com/api/user/create.php";
+
+
 var x = new XMLHttpRequest(); 
 if(x) x.onreadystatechange=function(){ 
     if (x.readyState === 4 && x.status===200){
@@ -22,6 +43,7 @@ $('#obtenerlista').click(async(e)=>{
         success: function (data) {
             $('.loader-billing').css('display','none');
             $('.listabilling').css('display','block');
+            $('#tabla> tbody').empty();
             $.each(data, function (i, item) {
            
             var rows ="<tr>"+
@@ -60,6 +82,7 @@ $('#obtenerdireccion').click(async(e)=> {
         success: function (data) {
             $('.loader-location').css('display','none');
             $('.listadireccion').css('display','block');
+            $('#tablalocation> tbody').empty();
             $.each(data, function (i, item) {
            
             var rows ="<tr>"+
@@ -145,9 +168,9 @@ $('#obtenerusuarios').click(async(e)=> {
             
             $('.loader-users').css('display','none');
             $('.lista').css('display','block');
-     
+            $('#tablauser> tbody').empty();
             $.each(data, function (i, item) {
-           
+         
             var rows ="<tr>"+
             "<td>"+item.id+"</td>"+
             "<td>"+ item.name+"</td>"+
@@ -166,7 +189,12 @@ $('#obtenerusuarios').click(async(e)=> {
             console.log(data.responseText);
         }
      });
+
+
+ 
 });
+
+
 
 
 ///Guardar usuarios
@@ -181,7 +209,12 @@ $("#guardarUser").click('submit', function(e){
 	var location=document.getElementById('location').value;
 
     if(name=="" || Location==""){
-        alert("Campos vacios");
+       
+          swal("Campos Vacios", {
+            icon: 'error',
+            showConfirmButton: false,
+            timer:1000 
+          });
         return true;
 
     }else{
@@ -252,7 +285,11 @@ $("#guardarLocation").click('submit', function(e){
     var codigo=null;
 	var location=document.getElementById('location').value;
     if(location==""){
-        alert("Campos vacios");
+        swal("Campos Vacios", {
+            icon: 'error',
+            showConfirmButton: false,
+            timer:1000 
+          });
         return true;
 
     }else{
@@ -289,7 +326,11 @@ $("#guardarBilling").click('submit', function(e){
     var debit=parseFloat(document.getElementById('Form-debit').value);
     var credit=parseFloat(document.getElementById('Form-credit').value);
   if(description=="" || idusuario=="" || debit=="" || credit==""){
-      alert("ampos Vacios");
+    swal("Campos Vacios", {
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1000 
+      });
 
   }else{
       
