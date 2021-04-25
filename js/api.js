@@ -67,6 +67,29 @@ $('#obtenerlista').click(async(e)=>{
             console.log(data.responseText);
         }
      });
+
+     
+     fetch(urlReadyPHPb,{
+        type:"GET",
+        cors:"false",
+        datatype:'json',
+        headers:{
+           'Content-Type': 'application/json'
+         }
+
+         }) .then(response=>{
+               var rows =`<tr>
+               <td>${response.data.id}</td>
+               <td>${response.data.description}</td>
+               <td>${response.data.idUser}</td>
+               <td>${response.data.debt}</td>
+               <td>${response.data.credit}</td>
+               <td>   <a  class='editar btn btn-success btn-rounded btn-md ml-md-0'><i class='fas fa-edit'></i></a>
+               <button type='button' class='eliminar btn btn-danger btn-rounded btn-md ml-md-0'><i class='fas fa-trash'></i></button></td>
+               </tr>`;
+               $('#tablauser> tbody').append(rows);
+
+    }).catch(err=>console.log(err));
 });
 
 //Mostrar datos de direcciones en tabla
@@ -100,6 +123,26 @@ $('#obtenerdireccion').click(async(e)=> {
             console.log(data.responseText);
         }
      });
+
+     //direcciones de PHP
+     fetch(urlReadyPHPl,{
+        type:"GET",
+        cors:"false",
+        datatype:'json',
+        headers:{
+           'Content-Type': 'application/json'
+         }
+
+         }) .then(response=>{
+               var rows =`<tr>
+               <td>${response.data.id}</td>
+               <td>${response.data.location}</td>
+               <td>   <a  class='editar btn btn-success btn-rounded btn-md ml-md-0'><i class='fas fa-edit'></i></a>
+               <button type='button' class='eliminar btn btn-danger btn-rounded btn-md ml-md-0'><i class='fas fa-trash'></i></button></td>
+               </tr>`;
+               $('#tablauser> tbody').append(rows);
+
+    }).catch(err=>console.log(err));
 });
 
 
@@ -152,7 +195,7 @@ $(document).ready(async(e)=> {
      });
 
 
-});
+},2000);
 
 //mandar datos a la tabla de users
 $('#obtenerusuarios').click(async(e)=> {
@@ -190,8 +233,30 @@ $('#obtenerusuarios').click(async(e)=> {
         }
      });
 
+    //  PHP
 
- 
+     fetch(urlReadyPHPa,{
+         type:"GET",
+         cors:"false",
+         datatype:'json',
+         headers:{
+            'Content-Type': 'application/json'
+          }
+
+          }) .then(response=>{
+                var rows =`<tr>
+                <td>${response.data.id}</td>
+                <td>${resonse.data.name}</td>
+                <td>${response.data.location}</td>
+                <td>   <a  class='editar btn btn-success btn-rounded btn-md ml-md-0'><i class='fas fa-edit'></i></a>
+                <button type='button' class='eliminar btn btn-danger btn-rounded btn-md ml-md-0'><i class='fas fa-trash'></i></button></td>
+                </tr>`;
+                $('#tablauser> tbody').append(rows);
+
+     }).catch(err=>console.log(err));
+
+
+        
 });
 
 
