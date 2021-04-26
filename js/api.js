@@ -128,7 +128,7 @@ $('#obtenerdireccion').click(async(e)=> {
      //direcciones de PHP
      async function postData(url = '', data = {}) {
         const response = await fetch(url, {
-          method: 'GET', 
+          method: 'POST', 
           mode: 'cors', 
           cache: 'no-cache',
           credentials: 'same-origin', 
@@ -278,7 +278,7 @@ $('#obtenerusuarios').click(async(e)=> {
      //DATOS DE USUARIOS DE PHP
      async function postData(url = '', data = {}) {
         const response = await fetch(url, {
-          method: 'GET', 
+          method: 'POST', 
           mode: 'cors', 
           cache: 'no-cache',
           credentials: 'same-origin', 
@@ -312,7 +312,7 @@ $('#obtenerusuarios').click(async(e)=> {
        //DATOS DE USUARIO PYTHON
         async function postData(url = '', data = {}) {
             const response = await fetch(url, {
-              method: 'GET', 
+              method: 'POST', 
               mode: 'cors', 
               cache: 'no-cache',
               credentials: 'same-origin', 
