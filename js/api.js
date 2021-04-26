@@ -852,10 +852,34 @@ $("#guardarBilling").click('submit', function(e){
                 alert('Has actualizado los datos de direccion');
                 },
                 'error': function(jqXHR, textStatus, errorThrown) {
-                    alert(' Error in processing!');
+                    alert(' Error in processing! python');
                     console.log(JSON.stringify(data));
                 }
             });
+            $.ajax({
+                headers: { 'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'crossDomain': true, 
+                },
+                'type': 'PUT',
+                'url':  urlUpdatePyb,
+                'data': JSON.stringify({
+                    "description":"Prueba 1",
+                        "id_user":codigo,
+                        "debt":debit,
+                        "credit":credit
+
+                }),
+                'dataType':'json',
+                'success': function(data) {
+                alert('Has actualizado los datos de billin python');
+                },
+                'error': function(jqXHR, textStatus, errorThrown) {
+                    alert(' Error in processing! python');
+                  
+                }
+            });
+          
         }
         document.getElementById('idbilling').value="";
         document.getElementById('Form-descripcion').value="";
