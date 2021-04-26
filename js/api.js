@@ -77,7 +77,7 @@ $('#obtenerlista').click(async(e)=>{
       postData(urlReadyPHPb, { answer: 42 })
         .then(response => {
             $('.loader-billing').css('display','none');
-            response.data.forEach(e=>{
+            response.data.forEach(e => {
                 const rows =`<tr>
                 <td>${e.id}</td>
                 <td>${e.description}</td>
@@ -88,7 +88,7 @@ $('#obtenerlista').click(async(e)=>{
                 <a type='button' class='eliminar btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>
                 </tr>`;
                 $('#tabla> tbody').append(rows);
-              })
+            });
         });
      
 });
@@ -144,7 +144,7 @@ $('#obtenerdireccion').click(async(e)=> {
       postData(urlReadyPHPl, { answer: 42 })
         .then(response => {
             $('.loader-location').css('display','none');
-            response.data.forEach(e=>{
+            response.data.forEach(e => {
                 const rows =`<tr class="teal lighten-5">
                 <td>${e.id}</td>
                 <td>${e.location}</td>
@@ -152,7 +152,7 @@ $('#obtenerdireccion').click(async(e)=> {
                  <a type='button' class='eliminarlocation btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>
                 </tr>`;
                 $('#tablalocation> tbody').append(rows);
-              })
+            });
         });
 
         //direcciones Python
@@ -653,9 +653,7 @@ $(document).on("click", ".eliminarlocation", function(e){
       });
 
     })
-
-
-    
+  
 $(document).on("click", ".eliminarlocationJava", function(e){	 
     e.preventDefault();	        
     fila = $(this).closest("tr");	
@@ -685,6 +683,11 @@ $(document).on("click", ".eliminarlocationJava", function(e){
                 },
                 redirect: 'follow', 
                 referrerPolicy: 'no-referrer', 
+                success: function(){
+                    alert('Eliminado con exito');
+                },error:function(){
+                    alert('Error');
+                }
             })
             .then(response=>response.json())
             .then(response=>{
