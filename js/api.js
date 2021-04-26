@@ -20,7 +20,7 @@ const urlInsertPHPb="https://apiweb12.herokuapp.com/api/billing/create.php";
 
 const urlInsertPHPl="https://apiweb12.herokuapp.com/api/location/create.php";
 const urlInsertPHPa="https://apiweb12.herokuapp.com/api/user/create.php";
-
+const urlDeleteLocation='http://proyectoclasecc.herokuapp.com/principal/delete/location/';
 
 //Mostrar datos billing en la tabla
 $('#obtenerlista').click(async(e)=>{
@@ -32,7 +32,7 @@ $('#obtenerlista').click(async(e)=>{
         datatype:'json',
         credentials: 'include',
         success: function (data) {
-            $('.loader-billing').css('display','none');
+         
             $('.listabilling').css('display','block');
             $('#tabla> tbody').empty();
             $.each(data, function (i, item) {
@@ -76,6 +76,7 @@ $('#obtenerlista').click(async(e)=>{
       }
       postData(urlReadyPHPb, { answer: 42 })
         .then(response => {
+            $('.loader-billing').css('display','none');
             response.data.forEach(e=>{
                 const rows =`<tr>
                 <td>${e.id}</td>
@@ -103,16 +104,16 @@ $('#obtenerdireccion').click(async(e)=> {
         datatype:'json',
         credentials: 'include',
         success: function (data) {
-            $('.loader-location').css('display','none');
+          
             $('.listadireccion').css('display','block');
             $('#tablalocation> tbody').empty();
             $.each(data, function (i, item) {
            
-            var rows ="<tr>"+
+            var rows ="<tr class='cyan lighten-4'>"+
             "<td>"+item.id+"</td>"+
             "<td>"+ item.location+"</td>"+
             "<td><a  class='editarlocation  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>"+
-            "<a class='eliminarlocation  btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>"+
+            "<a class='eliminarlocationJava  btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>"+
             "</tr>";
         $('#tablalocation> tbody').append(rows);
         });
@@ -142,8 +143,9 @@ $('#obtenerdireccion').click(async(e)=> {
       }
       postData(urlReadyPHPl, { answer: 42 })
         .then(response => {
+            $('.loader-location').css('display','none');
             response.data.forEach(e=>{
-                const rows =`<tr>
+                const rows =`<tr class="teal lighten-5">
                 <td>${e.id}</td>
                 <td>${e.location}</td>
                 <td>   <a class='editarlocation  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
@@ -152,9 +154,10 @@ $('#obtenerdireccion').click(async(e)=> {
                 $('#tablalocation> tbody').append(rows);
               })
         });
+
+        //direcciones Python
      
 });
-
 
 //select de formulario users
 
@@ -180,6 +183,31 @@ $(document).ready(async(e)=> {
             console.log(data.responseText);
         }
      });
+
+     async function postData(url = '', data = {}) {
+        const response = await fetch(url, {
+          method: 'GET', 
+          mode: 'cors', 
+          cache: 'no-cache',
+          credentials: 'same-origin', 
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          redirect: 'follow', 
+          referrerPolicy: 'no-referrer', 
+          body: JSON.stringify(data.data) 
+        });
+        return response.json(); 
+      }
+      postData(urlReadyPHPa, { answer: 42 }).then(response=>{
+      
+            for(i in response.data){
+                $('#location').append('<option value="' + i.id + '">' + i.location + '</option>');
+            }
+           
+        
+      })
+  
 
      //select de formulario billing
      $.ajax({
@@ -207,8 +235,7 @@ $(document).ready(async(e)=> {
         }
      });
 
-
-},2000);
+});
 
 //mandar datos a la tabla de users
 $('#obtenerusuarios').click(async(e)=> {
@@ -223,7 +250,7 @@ $('#obtenerusuarios').click(async(e)=> {
 
         success: function (data) {
             
-            $('.loader-users').css('display','none');
+           
             $('.lista').css('display','block');
             $('#tablauser> tbody').empty();
             $.each(data, function (i, item) {
@@ -247,6 +274,8 @@ $('#obtenerusuarios').click(async(e)=> {
         }
      });
     
+
+     //DATOS DE USUARIOS DE PHP
      async function postData(url = '', data = {}) {
         const response = await fetch(url, {
           method: 'GET', 
@@ -262,21 +291,56 @@ $('#obtenerusuarios').click(async(e)=> {
         });
         return response.json(); 
       }
+
       postData(urlReadyPHPa, { answer: 42 })
         .then(response => {
+            $('.loader-users').css('display','none');
             response.data.forEach(e=>{
                 const rows =`<tr>
                 <td>${e.id}</td>
                 <td>${e.name}</td>
                 <td>${e.location}</td>
-                <td>   <a class='editar  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
-                 <a type='button' class='eliminar btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>
+                <td>   <a class='editarUsuarioPhp  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
+                 <a type='button' class='eliminarUsuarioPhp btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>
                 </tr>`;
                 $('#tablauser> tbody').append(rows);
               
               })
                   
         });
+
+       //DATOS DE USUARIO PYTHON
+        async function postData(url = '', data = {}) {
+            const response = await fetch(url, {
+              method: 'GET', 
+              mode: 'cors', 
+              cache: 'no-cache',
+              credentials: 'same-origin', 
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              redirect: 'follow', 
+              referrerPolicy: 'no-referrer', 
+              body: JSON.stringify(data.data) 
+            });
+            return response.json(); 
+          }
+
+          postData(urlReadyPHPa, { answer: 42 })
+            .then(response => {
+                response.data.forEach(e=>{
+                    const rows =`<tr>
+                    <td>${e.id}</td>
+                    <td>${e.name}</td>
+                    <td>${e.location}</td>
+                    <td>   <a class='editar  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
+                     <a type='button' class='eliminar btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>
+                    </tr>`;
+                    $('#tablauser> tbody').append(rows);
+                  
+                  })
+                      
+            });
 
 
 });
@@ -304,7 +368,7 @@ $(document).on("click", ".editar", function(e){
 ///Guardar usuarios
 
 $("#guardarUser").click('submit', function(e){
-    if($("#guardarUser").value=="Guardar"){
+    if($("#guardarUser").text()=="Guardar"){
     e.preventDefault();
         var codigo=null;
         var name = document.getElementById('Form-name').value;	   
@@ -403,8 +467,6 @@ $(document).on("click", ".eliminar", function(e){
     
     // $("#guardarUser").css("display","none");
     // $("#updateUser").css("display","block");
-
-
     swal({
         title: "Eliminar Registro?",
         text: "Desea eliminar a "+name+"?",
@@ -439,8 +501,6 @@ $(document).on("click", ".eliminar", function(e){
 
     })
 
-
-
 //mandar datos de direccion a tabla de direcciones
 $(document).on("click", ".editarlocation", function(e){	 
     e.preventDefault();	        
@@ -455,8 +515,8 @@ $(document).on("click", ".editarlocation", function(e){
 });
 
 //Guardar location
-$("#guardarLocation").click('submit', function(e){
-    if($("#guardarLocation").value=="Guardar"){
+$("#guardarLocation").click(function(e){
+    if(document.getElementById("guardarLocation").innerText=="GUARDAR"){
         e.preventDefault();
         var codigo=null;
         var location=document.getElementById('location').value;
@@ -466,8 +526,8 @@ $("#guardarLocation").click('submit', function(e){
                 showConfirmButton: false,
                 timer:1000 
               });
-            return true;
-    
+           
+             
         }else{
             $.ajax({
                 headers: { 'Accept': 'application/json',
@@ -487,10 +547,10 @@ $("#guardarLocation").click('submit', function(e){
                     alert(' Error in processing!');
                 }
             });
-        
+
         }
 
-
+     
     }else{
         if(location==""){
             swal("Campos Vacios", {
@@ -498,7 +558,7 @@ $("#guardarLocation").click('submit', function(e){
                 showConfirmButton: false,
                 timer:1000 
               });
-            return true;
+          
     
         }else{
             e.preventDefault();
@@ -511,7 +571,6 @@ $("#guardarLocation").click('submit', function(e){
                 'id':codigo,
                 'location':location
             }
-
             $.ajax({
                 headers: { 'Accept': 'application/json',
                     'Content-Type': 'application/json' ,
@@ -525,7 +584,8 @@ $("#guardarLocation").click('submit', function(e){
                 alert('Has actualizado los datos de direccion');
                 },
                 'error': function(jqXHR, textStatus, errorThrown) {
-                    alert(' Error in processing!');
+                   
+                    alert(' Error in processing!'+dato);
                     console.log(JSON.stringify(data));
                 }
             });
@@ -534,6 +594,8 @@ $("#guardarLocation").click('submit', function(e){
         }
 
     }
+
+    
    
    
 
@@ -544,32 +606,47 @@ $(document).on("click", ".eliminarlocation", function(e){
     fila = $(this).closest("tr");	
     var codigo = parseInt(fila.find('td:eq(0)').text()); //capturo el ID
     var location = (fila.find('td:eq(1)').text());
-    
-    // $("#guardarUser").css("display","none");
-    // $("#updateUser").css("display","block");
-
+  
 
     swal({
         title: "Eliminar Registro?",
-        text: "Desea eliminar a "+location+"?",
+        text: "Desea eliminar a "+location+"? "+codigo+"",
         icon: "warning",
         buttons: true,
         dangerMode: true,
       })
       .then((ok) => {
         if (ok) {
-            $.ajax({
-                url:urlLocation,
-                type:"DELETE",
-                headers:{ 'crossDomain': true},
-                data:{id:codigo},
-                success: function(res){
-                    console.log(res);
-                }
-            }).then((ok)=>{
-                swal("El registro ha sido eliminado", {
-                icon: "success",
-          });
+        //     $.ajax({
+        //         url:urlDeleteLocation,
+        //         type:"DELETE",
+        //         headers:{ 'crossDomain': true},
+        //         data:{id:codigo,'location':location},
+        //         success: function(res){
+        //             console.log(res);
+        //         }
+        //     }).then((ok)=>{
+        //         swal("El registro ha sido eliminado", {
+        //         icon: "success",
+        //   });
+        //     })
+
+            fetch(urlDeleteLocation,{
+                type:'DELETE',
+                data:{
+                    'id':codigo
+                }, 
+                mode: 'cors', 
+                cache: 'no-cache',
+                credentials: 'same-origin', 
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                redirect: 'follow', 
+                referrerPolicy: 'no-referrer', 
+            }).then(response=>response.json()).then(response=>{
+                alert("DATOS de location eliminados");
+                console.log('datos'+response.data);
             })
          
         }
@@ -578,6 +655,47 @@ $(document).on("click", ".eliminarlocation", function(e){
     })
 
 
+    
+$(document).on("click", ".eliminarlocationJava", function(e){	 
+    e.preventDefault();	        
+    fila = $(this).closest("tr");	
+    var codigo = (fila.find('td:eq(0)').text()); //capturo el ID
+    var location = (fila.find('td:eq(1)').text());
+  
+
+    swal({
+        title: "Eliminar Registro?",
+        text: "Desea eliminar a "+location+"? "+codigo+"",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((ok) => {
+        if (ok) {
+            fetch(urlLocation,{
+                type:'DELETE',
+                data:{
+                    id:codigo
+                }, 
+                mode: 'cors', 
+                cache: 'no-cache',
+                credentials: 'same-origin', 
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                redirect: 'follow', 
+                referrerPolicy: 'no-referrer', 
+            })
+            .then(response=>response.json())
+            .then(response=>{
+
+            
+            })
+         
+        }
+      });
+
+    })
 
 
 //mandar datos de direccion a tabla de billing
@@ -607,7 +725,7 @@ $(document).on("click", ".editarbilling", function(e){
 
 //Guardar billin
 $("#guardarBilling").click('submit', function(e){
-  if($("#guardarBilling").value=="Guardar"){
+  if(document.getElementById("guardarBilling").innerText=="GUARDAR"){
             e.preventDefault();
             var codigo=null;
             var description=document.getElementById('Form-descripcion').value;
