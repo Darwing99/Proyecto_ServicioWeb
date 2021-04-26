@@ -75,17 +75,19 @@ $('#obtenerlista').click(async(e)=>{
         return response.json(); 
       }
       postData(urlReadyPHPb, { answer: 42 })
-        .then(data => {
-            var rowsphp =`<tr class='default-color'>
-            <td>${data.id}</td>
-            <td>${data.description}</td>
-            <td>${data.id_user}</td>
-            <td>${data.debt}</td>
-            <td>${data.credit}</td>
-            <td>   <a  class='editar  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
-            <a type='button' class='eliminar btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>
-            </tr>`;
-            $('#tabla> tbody').append(rowsphp);
+        .then(response => {
+            response.data.forEach(e=>{
+                const rows =`<tr>
+                <td>${e.id}</td>
+                <td>${e.description}</td>
+                <td>${e.id_user}</td>
+                <td>${e.debt}</td>
+                <td>${e.credit}</td>
+                <td>   <a  class='editar  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
+                <a type='button' class='eliminar btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>
+                </tr>`;
+                $('#tabla> tbody').append(rows);
+              })
         });
      
 });
@@ -139,14 +141,16 @@ $('#obtenerdireccion').click(async(e)=> {
         return response.json(); 
       }
       postData(urlReadyPHPl, { answer: 42 })
-        .then(data => {
-            var rows ="<tr>"+
-            "<td>"+data.data.id+"</td>"+
-            "<td>"+ data.data.location+"</td>"+
-            "<td><a  class='editarlocation  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>"+
-            "<a class='eliminarlocation  btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>"+
-            "</tr>";
-            $('#tabla> tbody').append(rows);
+        .then(response => {
+            response.data.forEach(e=>{
+                const rows =`<tr>
+                <td>${e.id}</td>
+                <td>${e.location}</td>
+                <td>   <a class='editarlocation  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
+                 <a type='button' class='eliminarlocation btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>
+                </tr>`;
+                $('#tablalocation> tbody').append(rows);
+              })
         });
      
 });
@@ -259,24 +263,22 @@ $('#obtenerusuarios').click(async(e)=> {
         return response.json(); 
       }
       postData(urlReadyPHPa, { answer: 42 })
-        .then(data => {
-            $.each(data, function (i, item) {
-                console.log(data);
-                  var rows ="<tr>"+
-                    "<td>"+data.id+"</td>"+
-                    "<td>"+ data.name+"</td>"+
-                    "<td>"+ data.location+"</td>"+
-                    "<td>   <a  class='editar  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>"+
-                    " <a type='button' class='eliminar btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>"+
-                    "</tr>";
-                    $('#tabla> tbody').append(rows);
-                    
-          
-                });
+        .then(response => {
+            response.data.forEach(e=>{
+                const rows =`<tr>
+                <td>${e.id}</td>
+                <td>${e.name}</td>
+                <td>${e.location}</td>
+                <td>   <a class='editar  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
+                 <a type='button' class='eliminar btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>
+                </tr>`;
+                $('#tablauser> tbody').append(rows);
+              
+              })
+                  
         });
 
 
-        
 });
 
 
