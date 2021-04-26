@@ -631,23 +631,27 @@ $(document).on("click", ".eliminarlocation", function(e){
         //   });
         //     })
 
-            fetch(urlDeleteLocation,{
-                type:'DELETE',
-                data:{
-                    'id':codigo
-                }, 
-                mode: 'cors', 
-                cache: 'no-cache',
-                credentials: 'same-origin', 
-                headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                redirect: 'follow', 
-                referrerPolicy: 'no-referrer', 
-            }).then(response=>response.json()).then(response=>{
-                alert("DATOS de location eliminados");
-                console.log('datos'+response.data);
-            })
+        fetch(urlDeleteLocation, { type: 'DELETE',  
+        data:{'id':codigo},
+        headers: { 
+            'Authorization': 'Bearer my-token',
+            'My-Custom-Header': 'foobar'
+        } })
+        .then(async response => {
+            const data = await response.json();
+
+          
+            if (!response.ok) {
+             
+                const error = (data && data.message) || response.status;
+                return Promise.reject(error);
+            }
+
+         
+        })
+        .catch(error => {
+            
+        });
          
         }
       });
