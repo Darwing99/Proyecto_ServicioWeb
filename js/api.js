@@ -22,15 +22,6 @@ const urlInsertPHPl="https://apiweb12.herokuapp.com/api/location/create.php";
 const urlInsertPHPa="https://apiweb12.herokuapp.com/api/user/create.php";
 
 
-var x = new XMLHttpRequest(); 
-if(x) x.onreadystatechange=function(){ 
-    if (x.readyState === 4 && x.status===200){
-        console.log(x.responseText); //Success
-    }else{ 
-        console.log(x); //Failed
-    }
-};
-
 //Mostrar datos billing en la tabla
 $('#obtenerlista').click(async(e)=>{
     $('.loader-billing').css('display','block');
@@ -68,28 +59,35 @@ $('#obtenerlista').click(async(e)=>{
         }
      });
 
+     async function postData(url = '', data = {}) {
+        const response = await fetch(url, {
+          method: 'GET', 
+          mode: 'cors', 
+          cache: 'no-cache',
+          credentials: 'same-origin', 
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          redirect: 'follow', 
+          referrerPolicy: 'no-referrer', 
+          body: JSON.stringify(data.data) 
+        });
+        return response.json(); 
+      }
+      postData(urlReadyPHPb, { answer: 42 })
+        .then(data => {
+            var rowsphp =`<tr class='default-color'>
+            <td>${data.id}</td>
+            <td>${data.description}</td>
+            <td>${data.id_user}</td>
+            <td>${data.debt}</td>
+            <td>${data.credit}</td>
+            <td>   <a  class='editar  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
+            <a type='button' class='eliminar btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>
+            </tr>`;
+            $('#tabla> tbody').append(rowsphp);
+        });
      
-     fetch(urlReadyPHPb,{
-        type:"GET",
-        cors:"false",
-        datatype:'json',
-        headers:{
-           'Content-Type': 'application/json'
-         }
-
-         }) .then(response=>{
-               var rows =`<tr class='default-color'>
-               <td>${response.data.id}</td>
-               <td>${response.data.description}</td>
-               <td>${response.data.idUser}</td>
-               <td>${response.data.debt}</td>
-               <td>${response.data.credit}</td>
-               <td>   <a  class='editar  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
-               <button type='button' class='eliminar btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></button></td>
-               </tr>`;
-               $('#tablauser> tbody').append(rows);
-
-    }).catch(err=>console.log(err));
 });
 
 //Mostrar datos de direcciones en tabla
@@ -125,24 +123,32 @@ $('#obtenerdireccion').click(async(e)=> {
      });
 
      //direcciones de PHP
-     fetch(urlReadyPHPl,{
-        type:"GET",
-        cors:"false",
-        datatype:'json',
-        headers:{
-           'Content-Type': 'application/json'
-         }
-
-         }) .then(response=>{
-               var rows =`<tr class='default-color'>
-               <td>${response.data.id}</td>
-               <td>${response.data.location}</td>
-               <td>   <a  class='editar  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
-               <button type='button' class='eliminar btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></button></td>
-               </tr>`;
-               $('#tablauser> tbody').append(rows);
-
-    }).catch(err=>console.log(err));
+     async function postData(url = '', data = {}) {
+        const response = await fetch(url, {
+          method: 'GET', 
+          mode: 'cors', 
+          cache: 'no-cache',
+          credentials: 'same-origin', 
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          redirect: 'follow', 
+          referrerPolicy: 'no-referrer', 
+          body: JSON.stringify(data.data) 
+        });
+        return response.json(); 
+      }
+      postData(urlReadyPHPl, { answer: 42 })
+        .then(data => {
+            var rows ="<tr>"+
+            "<td>"+data.data.id+"</td>"+
+            "<td>"+ data.data.location+"</td>"+
+            "<td><a  class='editarlocation  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>"+
+            "<a class='eliminarlocation  btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>"+
+            "</tr>";
+            $('#tabla> tbody').append(rows);
+        });
+     
 });
 
 
@@ -176,7 +182,10 @@ $(document).ready(async(e)=> {
         type: "GET",
         url: urlUser,
         datatype:'json',
-        headers:{'Content-Type':'application/json'},
+        headers:{
+            'crossDomain': true,
+            'Content-Type': 'application/json'
+          },
         credentials: 'include',
 
         success: function (data) {
@@ -204,6 +213,7 @@ $('#obtenerusuarios').click(async(e)=> {
    $.ajax({
         type: "GET",
         url:urlUser,
+     
         datatype:'json',
         credentials: 'include',
 
@@ -232,28 +242,38 @@ $('#obtenerusuarios').click(async(e)=> {
             console.log(data.responseText);
         }
      });
-
-    //  PHP
-
-     fetch(urlReadyPHPa,{
-         type:"GET",
-         cors:"false",
-         datatype:'json',
-         headers:{
-            'Content-Type': 'application/json'
-          }
-
-          }) .then(response=>{
-                var rows =`<tr class='default-color'>
-                <td>${response.data.id}</td>
-                <td>${resonse.data.name}</td>
-                <td>${response.data.location}</td>
-                <td>   <a  class='editar  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
-                <button type='button' class='eliminar  btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></button></td>
-                </tr>`;
-                $('#tablauser> tbody').append(rows);
-
-     }).catch(err=>console.log(err));
+    
+     async function postData(url = '', data = {}) {
+        const response = await fetch(url, {
+          method: 'GET', 
+          mode: 'cors', 
+          cache: 'no-cache',
+          credentials: 'same-origin', 
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          redirect: 'follow', 
+          referrerPolicy: 'no-referrer', 
+          body: JSON.stringify(data.data) 
+        });
+        return response.json(); 
+      }
+      postData(urlReadyPHPa, { answer: 42 })
+        .then(data => {
+            $.each(data, function (i, item) {
+                console.log(data);
+                  var rows ="<tr>"+
+                    "<td>"+data.id+"</td>"+
+                    "<td>"+ data.name+"</td>"+
+                    "<td>"+ data.location+"</td>"+
+                    "<td>   <a  class='editar  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>"+
+                    " <a type='button' class='eliminar btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>"+
+                    "</tr>";
+                    $('#tabla> tbody').append(rows);
+                    
+          
+                });
+        });
 
 
         
@@ -372,7 +392,6 @@ $("#guardarUser").click('submit', function(e){
 
 });
 
-
 //Eliminar Usuario
 $(document).on("click", ".eliminar", function(e){	 
     e.preventDefault();	        
@@ -397,13 +416,20 @@ $(document).on("click", ".eliminar", function(e){
                 url:urlUser,
                 type:"DELETE",
                 data:{id:codigo},
+                crossDomain : true,
+                xhrFields: {
+                      withCredentials: true
+                 },
+                 headers: {
+                    "Access-Control-Allow-Headers" : "Content-Type",
+                    "Access-Control-Allow-Origin": '*'
+                },
+              
                 success: function(res){
                     console.log(res);
                 }
             }).then((ok)=>{
-                swal("El registro ha sido eliminado", {
-            icon: "success",
-          });
+                swal("El registro ha sido eliminado");
             })
          
         }
@@ -486,7 +512,8 @@ $("#guardarLocation").click('submit', function(e){
 
             $.ajax({
                 headers: { 'Accept': 'application/json',
-                    'Content-Type': 'application/json' 
+                    'Content-Type': 'application/json' ,
+                    'crossDomain': true,
                 },
                 'type': 'PUT',
                 'url':  urlLocation,
@@ -532,6 +559,7 @@ $(document).on("click", ".eliminarlocation", function(e){
             $.ajax({
                 url:urlLocation,
                 type:"DELETE",
+                headers:{ 'crossDomain': true},
                 data:{id:codigo},
                 success: function(res){
                     console.log(res);
@@ -643,7 +671,8 @@ $("#guardarBilling").click('submit', function(e){
     
             $.ajax({
                 headers: { 'Accept': 'application/json',
-                    'Content-Type': 'application/json' 
+                    'Content-Type': 'application/json',
+                    'crossDomain': true, 
                 },
                 'type': 'PUT',
                 'url':  urlBillin,
@@ -691,6 +720,7 @@ $(document).on("click", ".eliminarbilling", function(e){
                 url:urlUser,
                 type:"DELETE",
                 data:{id:codigo},
+                headers:{ 'crossDomain': true},
                 success: function(res){
                     console.log(res);
                 }
