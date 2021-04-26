@@ -36,8 +36,9 @@ $('#obtenerlista').click(async(e)=>{
             $('.listabilling').css('display','block');
             $('#tabla> tbody').empty();
             $.each(data, function (i, item) {
+                $('.loader-billing').css('display','none');
            
-            var rows ="<tr>"+
+            var rows ="<tr class='cyan lighten-4'>"+
             "<td>"+item.id+"</td>"+
             "<td>"+ item.description+"</td>"+
             "<td>"+ item.idUser+"</td>"+
@@ -59,37 +60,37 @@ $('#obtenerlista').click(async(e)=>{
         }
      });
 
-     async function postData(url = '', data = {}) {
-        const response = await fetch(url, {
-          method: 'GET', 
-          mode: 'cors', 
-          cache: 'no-cache',
-          credentials: 'same-origin', 
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          redirect: 'follow', 
-          referrerPolicy: 'no-referrer', 
-          body: JSON.stringify(data.data) 
-        });
-        return response.json(); 
-      }
-      postData(urlReadyPHPb, { answer: 42 })
-        .then(response => {
-            $('.loader-billing').css('display','none');
-            response.data.forEach(e => {
-                const rows =`<tr>
-                <td>${e.id}</td>
-                <td>${e.description}</td>
-                <td>${e.id_user}</td>
-                <td>${e.debt}</td>
-                <td>${e.credit}</td>
-                <td>   <a  class='editar  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
-                <a type='button' class='eliminar btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>
-                </tr>`;
-                $('#tabla> tbody').append(rows);
-            });
-        });
+    //  async function postData(url = '', data = {}) {
+    //     const response = await fetch(url, {
+    //       method: 'POST', 
+    //       mode: 'cors', 
+    //       cache: 'no-cache',
+    //       credentials: 'same-origin', 
+    //       headers: {
+    //         'Content-Type': 'application/x-www-form-urlencoded',
+    //       },
+    //       redirect: 'follow', 
+    //       referrerPolicy: 'no-referrer', 
+    //       body: JSON.stringify(data.data) 
+    //     });
+    //     return response.json(); 
+    //   }
+    //   postData(urlReadyPHPb, { answer: 42 })
+    //     .then(response => {
+    //        
+    //         response.data.forEach(e => {
+    //             const rows =`<tr>
+    //             <td>${e.id}</td>
+    //             <td>${e.description}</td>
+    //             <td>${e.id_user}</td>
+    //             <td>${e.debt}</td>
+    //             <td>${e.credit}</td>
+    //             <td>   <a  class='editar  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
+    //             <a type='button' class='eliminar btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>
+    //             </tr>`;
+    //             $('#tabla> tbody').append(rows);
+    //         });
+    //     });
      
 });
 
@@ -108,6 +109,7 @@ $('#obtenerdireccion').click(async(e)=> {
             $('.listadireccion').css('display','block');
             $('#tablalocation> tbody').empty();
             $.each(data, function (i, item) {
+                $('.loader-location').css('display','none');
            
             var rows ="<tr class='cyan lighten-4'>"+
             "<td>"+item.id+"</td>"+
@@ -125,37 +127,37 @@ $('#obtenerdireccion').click(async(e)=> {
         }
      });
 
-     //direcciones de PHP
-     async function postData(url = '', data = {}) {
-        const response = await fetch(url, {
-          method: 'POST', 
-          mode: 'cors', 
-          cache: 'no-cache',
-          credentials: 'same-origin', 
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          redirect: 'follow', 
-          referrerPolicy: 'no-referrer', 
-          body: JSON.stringify(data.data) 
-        });
-        return response.json(); 
-      }
-      postData(urlReadyPHPl, { answer: 42 })
-        .then(response => {
-            $('.loader-location').css('display','none');
-            response.data.forEach(e => {
-                const rows =`<tr class="teal lighten-5">
-                <td>${e.id}</td>
-                <td>${e.location}</td>
-                <td>   <a class='editarlocation  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
-                 <a type='button' class='eliminarlocation btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>
-                </tr>`;
-                $('#tablalocation> tbody').append(rows);
-            });
-        });
+    //  //direcciones de PHP
+    //  async function postData(url = '', data = {}) {
+    //     const response = await fetch(url, {
+    //       method: 'POST', 
+    //       mode: 'cors', 
+    //       cache: 'no-cache',
+    //       credentials: 'same-origin', 
+    //       headers: {
+    //         'Content-Type': 'application/x-www-form-urlencoded',
+    //       },
+    //       redirect: 'follow', 
+    //       referrerPolicy: 'no-referrer', 
+    //       body: JSON.stringify(data.data) 
+    //     });
+    //     return response.json(); 
+    //   }
+    //   postData(urlReadyPHPl, { answer: 42 })
+    //     .then(response => {
+    //         
+    //         response.data.forEach(e => {
+    //             const rows =`<tr class="teal lighten-5">
+    //             <td>${e.id}</td>
+    //             <td>${e.location}</td>
+    //             <td>   <a class='editarlocation  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
+    //              <a type='button' class='eliminarlocation btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>
+    //             </tr>`;
+    //             $('#tablalocation> tbody').append(rows);
+    //         });
+    //     });
 
-        //direcciones Python
+    //     //direcciones Python
      
 });
 
@@ -184,29 +186,6 @@ $(document).ready(async(e)=> {
         }
      });
 
-     async function postData(url = '', data = {}) {
-        const response = await fetch(url, {
-          method: 'GET', 
-          mode: 'cors', 
-          cache: 'no-cache',
-          credentials: 'same-origin', 
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          redirect: 'follow', 
-          referrerPolicy: 'no-referrer', 
-          body: JSON.stringify(data.data) 
-        });
-        return response.json(); 
-      }
-      postData(urlReadyPHPa, { answer: 42 }).then(response=>{
-      
-            for(i in response.data){
-                $('#location').append('<option value="' + i.id + '">' + i.location + '</option>');
-            }
-           
-        
-      })
   
 
      //select de formulario billing
@@ -254,8 +233,8 @@ $('#obtenerusuarios').click(async(e)=> {
             $('.lista').css('display','block');
             $('#tablauser> tbody').empty();
             $.each(data, function (i, item) {
-         
-            var rows ="<tr>"+
+                $('.loader-users').css('display','none');
+            var rows ="<tr class='cyan lighten-4'>"+
             "<td>"+item.id+"</td>"+
             "<td>"+ item.name+"</td>"+
             "<td>"+ item.location+"</td>"+
@@ -276,71 +255,38 @@ $('#obtenerusuarios').click(async(e)=> {
     
 
      //DATOS DE USUARIOS DE PHP
-     async function postData(url = '', data = {}) {
-        const response = await fetch(url, {
-          method: 'POST', 
-          mode: 'cors', 
-          cache: 'no-cache',
-          credentials: 'same-origin', 
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          redirect: 'follow', 
-          referrerPolicy: 'no-referrer', 
-          body: JSON.stringify(data.data) 
-        });
-        return response.json(); 
-      }
+    //  async function postData(url = '', data = {}) {
+    //     const response = await fetch(url, {
+    //       method: 'POST', 
+    //       mode: 'cors', 
+    //       cache: 'no-cache',
+    //       credentials: 'same-origin', 
+    //       headers: {
+    //         'Content-Type': 'application/x-www-form-urlencoded',
+    //       },
+    //       redirect: 'follow', 
+    //       referrerPolicy: 'no-referrer', 
+    //       body: JSON.stringify(data.data) 
+    //     });
+    //     return response.json(); 
+    //   }
 
-      postData(urlReadyPHPa, { answer: 42 })
-        .then(response => {
-            $('.loader-users').css('display','none');
-            response.data.forEach(e=>{
-                const rows =`<tr>
-                <td>${e.id}</td>
-                <td>${e.name}</td>
-                <td>${e.location}</td>
-                <td>   <a class='editarUsuarioPhp  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
-                 <a type='button' class='eliminarUsuarioPhp btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>
-                </tr>`;
-                $('#tablauser> tbody').append(rows);
+    //   postData(urlReadyPHPa, { answer: 42 })
+    //     .then(response => {
+    //        
+    //         response.data.forEach(e=>{
+    //             const rows =`<tr>
+    //             <td>${e.id}</td>
+    //             <td>${e.name}</td>
+    //             <td>${e.location}</td>
+    //             <td>   <a class='editarUsuarioPhp  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
+    //              <a type='button' class='eliminarUsuarioPhp btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>
+    //             </tr>`;
+    //             $('#tablauser> tbody').append(rows);
               
-              })
+    //           })
                   
-        });
-
-       //DATOS DE USUARIO PYTHON
-        async function postData(url = '', data = {}) {
-            const response = await fetch(url, {
-              method: 'POST', 
-              mode: 'cors', 
-              cache: 'no-cache',
-              credentials: 'same-origin', 
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-              },
-              redirect: 'follow', 
-              referrerPolicy: 'no-referrer', 
-              body: JSON.stringify(data.data) 
-            });
-            return response.json(); 
-          }
-
-          postData(urlReadyPHPa, { answer: 42 })
-            .then(response => {
-                response.data.forEach(e=>{
-                    const rows =`<tr>
-                    <td>${e.id}</td>
-                    <td>${e.name}</td>
-                    <td>${e.location}</td>
-                    <td>   <a class='editar  btn-success btn-floating btn-md ml-md-0'><i class='fas fa-edit'></i></a>
-                     <a type='button' class='eliminar btn-danger btn-floating btn-md ml-md-0'><i class='fas fa-trash'></i></a></td>
-                    </tr>`;
-                    $('#tablauser> tbody').append(rows);
-                  
-                  })
-                      
-            });
+    //     });
 
 
 });
@@ -403,6 +349,44 @@ $("#guardarUser").click('submit', function(e){
                     alert(' Error in processing!');
                 }
             });
+            $.ajax({
+                headers: { 'Accept': 'application/json',
+                    'Content-Type': 'application/json' 
+                },
+                'type': 'POST',
+                'url':  urlInsertPya,
+                'data': JSON.stringify({
+                    'id':codigo,
+                    'name':name,
+                    'location':location
+                }),
+                'dataType':'json',
+                'success': function(data) {
+                alert('Has enviado los datos a python');
+                },
+                'error': function(jqXHR, textStatus, errorThrown) {
+                    alert(' Error in processing! python');
+                }
+            });
+            $.ajax({
+                headers: { 'Accept': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/x-www-form-urlencoded' 
+                },
+                'type': 'POST',
+                'url':  urlInsertPHPa,
+                'data': JSON.stringify({
+                    'id':codigo,
+                    'name':name,
+                    'location':location
+                }),
+                'dataType':'json',
+                'success': function(data) {
+                alert('Has enviado los datos a php');
+                },
+                'error': function(jqXHR, textStatus, errorThrown) {
+                    alert(' Error in processing! php');
+                }
+            });
 
         }
         }else{
@@ -446,6 +430,25 @@ $("#guardarUser").click('submit', function(e){
                         console.log(JSON.stringify(data));
                     }
                 });  
+                $.ajax({
+                    headers: { 'Accept': 'application/json',
+                        'Content-Type': 'application/json' 
+                    },
+                    'type': 'PUT',
+                    'url':  urlUpdatePya,
+                    'data': JSON.stringify({
+                        'id':codigo,
+                        'name':name,
+                        'location':location
+                    }),
+                    'dataType':'json',
+                    'success': function(data) {
+                    alert('Has actualizado los datos a python');
+                    },
+                    'error': function(jqXHR, textStatus, errorThrown) {
+                        alert(' Error in processing! python');
+                    }
+                });
                 document.getElementById('Form-name').value="";
                  document.getElementById('location').value="";
                 $("#guardarUser").html("Guardar");
@@ -547,6 +550,42 @@ $("#guardarLocation").click(function(e){
                     alert(' Error in processing!');
                 }
             });
+            $.ajax({
+                headers: { 'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded' 
+                },
+                'type': 'POST',
+                'url':  urlInsertPyl,
+                'data': JSON.stringify({
+                    'id':codigo,
+                    'location':location
+                  }),
+                'dataType':'json',
+                'success': function(data) {
+                 alert('Has enviado los datos a python');
+                },
+                'error': function(jqXHR, textStatus, errorThrown) {
+                    alert(' Error in processing python!');
+                }
+            });
+            $.ajax({
+                headers: { 'Accept': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/x-www-form-urlencoded' 
+                },
+                'type': 'POST',
+                'url':  urlInsertPHPl,
+                'data': JSON.stringify({
+                    'id':codigo,
+                    'location':location
+                  }),
+                'dataType':'json',
+                'success': function(data) {
+                 alert('Has enviado los datos a php');
+                },
+                'error': function(jqXHR, textStatus, errorThrown) {
+                    alert(' Error in processing! php');
+                }
+            });
 
         }
 
@@ -564,31 +603,51 @@ $("#guardarLocation").click(function(e){
             e.preventDefault();
             var codigo=document.getElementById('idlocation').value;
             var location=document.getElementById('location').value;
-
-            $.support.cors = true;
-
-            data={
-                'id':codigo,
-                'location':location
+            datos={
+               
             }
             $.ajax({
-                headers: { 'Accept': 'application/json',
-                    'Content-Type': 'application/json' ,
-                    'crossDomain': true,
-                },
-                'type': 'PUT',
-                'url':  urlLocation,
-                'data': JSON.stringify(data),
+             
+                'method': 'PUT',
+                'url':  urlLocation, 
+                'data': JSON.stringify({ 
+                        'id':codigo,
+                        'location':location}),
                 'dataType':'json',
+                headers: { 'Accept': 'application/json',
+                'Content-Type': 'application/json' 
+                },
                 'success': function(data) {
                 alert('Has actualizado los datos de direccion');
                 },
                 'error': function(jqXHR, textStatus, errorThrown) {
                    
-                    alert(' Error in processing!'+dato);
-                    console.log(JSON.stringify(data));
+                    alert(' Error in processing!');
+                    console.log(JSON.stringify(datos));
                 }
             });
+            $.ajax({
+                headers: { 'Accept': 'application/json',
+                'Content-Type': 'application/json' 
+                },
+                'method': 'PUT',
+                'url':  urlUpdatePyl,
+                'data': JSON.stringify({
+                    'id':codigo,
+                    'location':location
+                  }),
+                'dataType':'json',
+                'success': function(data) {
+                 alert('Has actualizado los datos en python');
+                },
+                'error': function(jqXHR, textStatus, errorThrown) {
+                    alert(' Error in processing python!');
+                }
+            });
+           
+            
+
+          
             document.getElementById('location').value=="";
             $("#guardarlocation").html("Guardar"); 
         }
@@ -601,63 +660,6 @@ $("#guardarLocation").click(function(e){
 
 });
 
-$(document).on("click", ".eliminarlocation", function(e){	 
-    e.preventDefault();	        
-    fila = $(this).closest("tr");	
-    var codigo = parseInt(fila.find('td:eq(0)').text()); //capturo el ID
-    var location = (fila.find('td:eq(1)').text());
-  
-
-    swal({
-        title: "Eliminar Registro?",
-        text: "Desea eliminar a "+location+"? "+codigo+"",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((ok) => {
-        if (ok) {
-        //     $.ajax({
-        //         url:urlDeleteLocation,
-        //         type:"DELETE",
-        //         headers:{ 'crossDomain': true},
-        //         data:{id:codigo,'location':location},
-        //         success: function(res){
-        //             console.log(res);
-        //         }
-        //     }).then((ok)=>{
-        //         swal("El registro ha sido eliminado", {
-        //         icon: "success",
-        //   });
-        //     })
-
-        fetch(urlDeleteLocation, { type: 'DELETE',  
-        data:{'id':codigo},
-        headers: { 
-            'Authorization': 'Bearer my-token',
-            'My-Custom-Header': 'foobar'
-        } })
-        .then(async response => {
-            const data = await response.json();
-
-          
-            if (!response.ok) {
-             
-                const error = (data && data.message) || response.status;
-                return Promise.reject(error);
-            }
-
-         
-        })
-        .catch(error => {
-            
-        });
-         
-        }
-      });
-
-    })
-  
 $(document).on("click", ".eliminarlocationJava", function(e){	 
     e.preventDefault();	        
     fila = $(this).closest("tr");	
@@ -667,7 +669,7 @@ $(document).on("click", ".eliminarlocationJava", function(e){
 
     swal({
         title: "Eliminar Registro?",
-        text: "Desea eliminar a "+location+"? "+codigo+"",
+        text: "Desea eliminar  "+location+"? "+codigo+"",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -675,15 +677,15 @@ $(document).on("click", ".eliminarlocationJava", function(e){
       .then((ok) => {
         if (ok) {
             fetch(urlLocation,{
-                type:'DELETE',
+                method:'DELETE',
                 data:{
                     id:codigo
                 }, 
-                mode: 'cors', 
+                mode: 'no-cors', 
                 cache: 'no-cache',
                 credentials: 'same-origin', 
-                headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded',
+                headers: { 'Accept': 'application/json',
+                'Content-Type': 'application/json' 
                 },
                 redirect: 'follow', 
                 referrerPolicy: 'no-referrer', 
@@ -769,6 +771,47 @@ $("#guardarBilling").click('submit', function(e){
                     alert(' Error in processing!');
                 }
             });
+            $.ajax({
+                headers: { 'Accept': 'application/json',
+                    'Content-Type': 'application/json' 
+                },
+
+                'type': 'POST',
+                'url':  urlInsertPyb,
+                'data': JSON.stringify({'id': codigo,
+                                        'description': description,
+                                        'idUser': idusuario,
+                                        'debt':debit,
+                                        'credit': credit    
+                                    }),
+                'dataType':'json',
+                'success': function(data) {
+                alert('Has enviado los datos a python');
+                },
+                'error': function(jqXHR, textStatus, errorThrown) {
+                    alert(' Error in processing! python');
+                }
+            });
+            $.ajax({
+                headers: { 'Accept': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/x-www-form-urlencoded' 
+                },
+                'type': 'POST',
+                'url':  urlInsertPHPb,
+                'data': JSON.stringify({'id': codigo,
+                                        'description': description,
+                                        'idUser': idusuario,
+                                        'debt':debit,
+                                        'credit': credit    
+                                    }),
+                'dataType':'json',
+                'success': function(data) {
+                alert('Has enviado los datos a php');
+                },
+                'error': function(jqXHR, textStatus, errorThrown) {
+                    alert(' Error in processing! php');
+                }
+            });
         }
   }else{
         e.preventDefault();
@@ -844,7 +887,7 @@ $(document).on("click", ".eliminarbilling", function(e){
       .then((ok) => {
         if (ok) {
             $.ajax({
-                url:urlUser,
+                url:urlBillin,
                 type:"DELETE",
                 data:{id:codigo},
                 headers:{ 'crossDomain': true},
