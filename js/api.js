@@ -360,7 +360,7 @@ $("#guardarUser").click('submit', function(e){
                 }),
                 datatype:'json',
                 'success': function(data) {
-                alert('Has enviado los datos a python');
+             
                 },
                 'error': function(jqXHR, textStatus, errorThrown) {
                     alert(' Error in processing! python');
@@ -379,7 +379,7 @@ $("#guardarUser").click('submit', function(e){
                 }),
                 'dataType':'json',
                 'success': function(data) {
-                alert('Has enviado los datos a php');
+                alert('Has enviado los datos');
                 },
                 'error': function(jqXHR, textStatus, errorThrown) {
                     alert(' Error in processing! php');
@@ -559,7 +559,7 @@ $("#guardarLocation").click(function(e){
                   }),
                 'dataType':'json',
                 'success': function(data) {
-                 alert('Has enviado los datos');
+                
                 },
                 'error': function(jqXHR, textStatus, errorThrown) {
                     alert(' Error in processing!');
@@ -576,7 +576,7 @@ $("#guardarLocation").click(function(e){
                   }),
                 'dataType':'json',
                 'success': function(data) {
-                 alert('Has enviado los datos a python');
+           
                 },
                 'error': function(jqXHR, textStatus, errorThrown) {
                     alert(' Error in processing python!');
@@ -594,7 +594,7 @@ $("#guardarLocation").click(function(e){
                   }),
                 'dataType':'json',
                 'success': function(data) {
-                 alert('Has enviado los datos a php');
+                 alert('Has enviado los datos');
                 },
                 'error': function(jqXHR, textStatus, errorThrown) {
                     alert(' Error in processing! php');
@@ -798,7 +798,7 @@ $("#guardarBilling").click('submit', function(e){
                                     }),
                 'dataType':'json',
                 'success': function(data) {
-                alert('Has enviado los datos');
+             
                 },
                 'error': function(jqXHR, textStatus, errorThrown) {
                     alert(' Error in processing!');
@@ -819,7 +819,7 @@ $("#guardarBilling").click('submit', function(e){
                     }),
                 'dataType':'json',
                 'success': function(data) {
-                alert('Has enviado los datos a python');
+              
                 },
                 'error': function(jqXHR, textStatus, errorThrown) {
                     alert(' Error in processing! python');
@@ -839,7 +839,7 @@ $("#guardarBilling").click('submit', function(e){
                                     }),
                 'dataType':'json',
                 'success': function(data) {
-                alert('Has enviado los datos a php');
+                alert('Has enviado los datos');
                 },
                 'error': function(jqXHR, textStatus, errorThrown) {
                     alert(' Error in processing! php');
@@ -882,7 +882,7 @@ $("#guardarBilling").click('submit', function(e){
                 'data': JSON.stringify(data),
                 'dataType':'json',
                 'success': function(data) {
-                alert('Has actualizado los datos de direccion');
+              
                 },
                 'error': function(jqXHR, textStatus, errorThrown) {
                     alert(' Error in processing! python');
@@ -905,7 +905,7 @@ $("#guardarBilling").click('submit', function(e){
                 }),
                 'dataType':'json',
                 'success': function(data) {
-                alert('Has actualizado los datos de billin python');
+                alert('Has actualizado los datos de billin );
                 },
                 'error': function(jqXHR, textStatus, errorThrown) {
                     alert(' Error in processing! python');
