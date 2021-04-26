@@ -3,15 +3,17 @@ const urlLocation="https://fierce-fortress-79578.herokuapp.com/api/location";
 const urlBillin="https://fierce-fortress-79578.herokuapp.com/api/billing";
 
 
-const urlInsertPyb="http://pythoncc.herokuapp.com/python/insert/billing/";
-const urlInsertPya="http://pythoncc.herokuapp.com/python/insert/user/account/";
-const urlInsertPyl="http://pythoncc.herokuapp.com/python/insert/location/";
-const urlUpdatePyb="http://pythoncc.herokuapp.com/python/update/billing/";
-const urlUpdatePya="http://pythoncc.herokuapp.com/python/update/user/account/";
-const urlUpdatePyl="http://pythoncc.herokuapp.com/python/update/location";
-const urlDeletePyb="http://pythoncc.herokuapp.com/python/delete/billing/";
-const urlDeletePya="http://pythoncc.herokuapp.com/python/delete/user/account/";
-const urlDeletePyl="http://pythoncc.herokuapp.com/python/delete/location/";
+const urlInsertPyb="http://proyectoclasecc.herokuapp.com/principal/insert/billing/";
+const urlInsertPya="http://proyectoclasecc.herokuapp.com/principal/insert/user/account/";
+const urlInsertPyl="http://proyectoclasecc.herokuapp.com/principal/insert/location/";
+
+const urlUpdatePyb="http://proyectoclasecc.herokuapp.com/principal/update/billing/";
+const urlUpdatePya="http://proyectoclasecc.herokuapp.com/principal/update/user/account/";
+const urlUpdatePyl="http://proyectoclasecc.herokuapp.com/principal/update/location";
+
+const urlDeletePyb="http://proyectoclasecc.herokuapp.com/principal/delete/billing/";
+const urlDeletePya="http://proyectoclasecc.herokuapp.com/principal/delete/user/account/";
+const urlDeletePyl="http://proyectoclasecc.herokuapp.com/principal/delete/location/";
 
 const urlReadyPHPb="https://apiweb12.herokuapp.com/api/billing/read.php";
 const urlReadyPHPl="https://apiweb12.herokuapp.com/api/location/read.php";
@@ -291,9 +293,6 @@ $('#obtenerusuarios').click(async(e)=> {
 
 });
 
-
-
-
 //Mandar datos  a las tablas 
 
 $(document).on("click", ".editar", function(e){	 
@@ -351,16 +350,15 @@ $("#guardarUser").click('submit', function(e){
             });
             $.ajax({
                 headers: { 'Accept': 'application/json',
-                    'Content-Type': 'application/json' 
-                },
-                'type': 'POST',
+                'Content-Type': 'application/json' 
+            },
+                'method': 'POST',
                 'url':  urlInsertPya,
-                'data': JSON.stringify({
-                    'id':codigo,
-                    'name':name,
+                'data':JSON.stringify({
+                    'Name':name,
                     'location':location
                 }),
-                'dataType':'json',
+                datatype:'json',
                 'success': function(data) {
                 alert('Has enviado los datos a python');
                 },
@@ -415,8 +413,8 @@ $("#guardarUser").click('submit', function(e){
                 }
     
                 $.ajax({
-                    headers: { 'Accept': 'application/json',
-                        'Content-Type': 'application/json' 
+                    headers: { 'Accept': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/x-www-form-urlencoded' 
                     },
                     'type': 'PUT',
                     'url':  urlUser,
@@ -431,14 +429,13 @@ $("#guardarUser").click('submit', function(e){
                     }
                 });  
                 $.ajax({
-                    headers: { 'Accept': 'application/json',
-                        'Content-Type': 'application/json' 
+                    headers: { 'Accept': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/x-www-form-urlencoded' 
                     },
                     'type': 'PUT',
                     'url':  urlUpdatePya,
                     'data': JSON.stringify({
-                        'id':codigo,
-                        'name':name,
+                        'Name':name,
                         'location':location
                     }),
                     'dataType':'json',
@@ -495,7 +492,25 @@ $(document).on("click", ".eliminar", function(e){
                 success: function(res){
                     console.log(res);
                 }
-            }).then((ok)=>{
+            })
+            $.ajax({
+                url:urlDeletePya,
+                type:"DELETE",
+                data:{id:codigo},
+                crossDomain : true,
+                xhrFields: {
+                      withCredentials: true
+                 },
+                 headers: {
+                    "Access-Control-Allow-Headers" : "Content-Type",
+                    "Access-Control-Allow-Origin": '*'
+                },
+              
+                success: function(res){
+                    console.log(res);
+                }
+            })
+            .then((ok)=>{
                 swal("El registro ha sido eliminado");
             })
          
@@ -552,12 +567,11 @@ $("#guardarLocation").click(function(e){
             });
             $.ajax({
                 headers: { 'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded' 
+                'Content-Type': 'application/json' 
                 },
                 'type': 'POST',
                 'url':  urlInsertPyl,
                 'data': JSON.stringify({
-                    'id':codigo,
                     'location':location
                   }),
                 'dataType':'json',
@@ -681,7 +695,6 @@ $(document).on("click", ".eliminarlocationJava", function(e){
                 data:{
                     id:codigo
                 }, 
-                mode: 'no-cors', 
                 cache: 'no-cache',
                 credentials: 'same-origin', 
                 headers: { 'Accept': 'application/json',
@@ -700,12 +713,33 @@ $(document).on("click", ".eliminarlocationJava", function(e){
 
             
             })
+            fetch(urlDeletePyl,{
+                method:'DELETE',
+                data:{
+                    id:codigo
+                }, 
+                cache: 'no-cache',
+                credentials: 'same-origin', 
+                headers: { 'Accept': 'application/json',
+                'Content-Type': 'application/json' 
+                },
+                redirect: 'follow', 
+                referrerPolicy: 'no-referrer', 
+                success: function(){
+                    alert('Eliminado con exito');
+                },error:function(){
+                    alert('Error');
+                }
+            })
+            .then(response=>response.json())
+            .then(response=>{
+            
+            })
          
         }
       });
 
     })
-
 
 //mandar datos de direccion a tabla de billing
 $(document).on("click", ".editarbilling", function(e){	 
@@ -729,7 +763,6 @@ $(document).on("click", ".editarbilling", function(e){
 
     
 });
-
 
 
 //Guardar billin
@@ -778,12 +811,12 @@ $("#guardarBilling").click('submit', function(e){
 
                 'type': 'POST',
                 'url':  urlInsertPyb,
-                'data': JSON.stringify({'id': codigo,
-                                        'description': description,
-                                        'idUser': idusuario,
-                                        'debt':debit,
-                                        'credit': credit    
-                                    }),
+                'data': JSON.stringify({ 
+                                Description:description,
+                                UserAccount:idusuario,
+                                Debit:debit,
+                                Credit:credit,
+                    }),
                 'dataType':'json',
                 'success': function(data) {
                 alert('Has enviado los datos a python');
@@ -918,7 +951,25 @@ $(document).on("click", ".eliminarbilling", function(e){
                 success: function(res){
                     console.log(res);
                 }
-            }).then((ok)=>{
+            })
+            $.ajax({
+                url:urlDeletePyb,
+                type:"DELETE",
+                data:{id:codigo},
+                headers:{ 'crossDomain': true},
+                success: function(res){
+                    console.log(res);
+                }
+            })
+            $.ajax({
+                type:"DELETE",
+                data:{id:codigo},
+                headers:{ 'crossDomain': true},
+                success: function(res){
+                    console.log(res);
+                }
+            })
+            .then((ok)=>{
                 swal("El registro ha sido eliminado", {
             icon: "success",
           });
