@@ -905,7 +905,7 @@ $("#guardarBilling").click('submit', function(e){
                 }),
                 'dataType':'json',
                 'success': function(data) {
-                alert('Has actualizado los datos de billin );
+                alert('Has actualizado los datos de billin' );
                 },
                 'error': function(jqXHR, textStatus, errorThrown) {
                     alert(' Error in processing! python');
