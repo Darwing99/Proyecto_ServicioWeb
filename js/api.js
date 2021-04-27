@@ -79,9 +79,8 @@ async function UpdatejavaUrl(url = '',data={}) {
     
    fetch(url, {
       method: 'PUT',
-      mode:'cors',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        'Content-Type': 'application/json;charset=UTF-8'
       },
       body: formBody
     })
