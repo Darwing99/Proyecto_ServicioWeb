@@ -24,6 +24,70 @@ const urlInsertPHPl="https://apiweb12.herokuapp.com/api/location/create.php";
 const urlInsertPHPa="https://apiweb12.herokuapp.com/api/user/create.php";
 const urlDeleteLocation='http://proyectoclasecc.herokuapp.com/principal/delete/location/';
 
+async function pythonUrl(url = '',data={}) {
+    
+    var formBody = [];
+
+    for (var property in data) {
+      var encodedKey = encodeURIComponent(property);
+      var encodedValue = encodeURIComponent(data[property]);
+      formBody.push(encodedKey + "=" + encodedValue);
+    }
+
+    formBody = formBody.join("&");
+    
+   fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+      },
+      body: formBody
+    })
+}
+
+async function UpdatepythonUrl(url = '',data={}) {
+    
+    var formBody = [];
+
+    for (var property in data) {
+      var encodedKey = encodeURIComponent(property);
+      var encodedValue = encodeURIComponent(data[property]);
+      formBody.push(encodedKey + "=" + encodedValue);
+    }
+
+    formBody = formBody.join("&");
+    
+   fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+      },
+      body: formBody
+    })
+}
+async function UpdatejavaUrl(url = '',data={}) {
+    
+    var formBody = [];
+
+    for (var property in data) {
+      var encodedKey = encodeURIComponent(property);
+      var encodedValue = encodeURIComponent(data[property]);
+      formBody.push(encodedKey + "=" + encodedValue);
+    }
+
+    formBody = formBody.join("&");
+    
+   fetch(url, {
+      method: 'PUT',
+      mode:'cors',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+      },
+      body: formBody
+    })
+}
+
+
 //Mostrar datos billing en la tabla
 $('#obtenerlista').click(async(e)=>{
     $('.loader-billing').css('display','block');
@@ -348,24 +412,19 @@ $("#guardarUser").click('submit', function(e){
                     alert(' Error in processing!');
                 }
             });
-            $.ajax({
-                headers: { 'Accept': 'application/json',
-                'Content-Type': 'application/json' 
-            },
-                'method': 'POST',
-                'url':  urlInsertPya,
-                'data':JSON.stringify({
-                    'Name':name,
-                    'location':location
-                }),
-                datatype:'json',
-                'success': function(data) {
-             
-                },
-                'error': function(jqXHR, textStatus, errorThrown) {
-                    alert(' Error in processing! python');
-                }
-            });
+
+            pythonUrl(urlInsertPya,
+                {
+                Name:name,
+                location:location
+                }).then(data=>{
+                console.log(data);
+                alert('Datos enviados');
+                });
+
+
+                //php
+
             $.ajax({
                 headers: { 'Accept': 'application/x-www-form-urlencoded',
                     'Content-Type': 'application/x-www-form-urlencoded' 
@@ -428,6 +487,18 @@ $("#guardarUser").click('submit', function(e){
                         console.log(JSON.stringify(data));
                     }
                 });  
+
+
+                updatepythonUrl(urlUpdatePya,
+                    {
+                    id:codigo,
+                    Name:name,
+                    location:location
+                    }).then(data=>{
+                    console.log(data);
+                    alert('Datos enviados');
+                    });
+    
                 $.ajax({
                     headers: { 'Accept': 'application/x-www-form-urlencoded',
                     'Content-Type': 'application/x-www-form-urlencoded' 
@@ -458,6 +529,7 @@ $("#guardarUser").click('submit', function(e){
 
 });
 
+
 //Eliminar Usuario
 $(document).on("click", ".eliminar", function(e){	 
     e.preventDefault();	        
@@ -481,12 +553,17 @@ $(document).on("click", ".eliminar", function(e){
                 type:"DELETE",
                 data:{id:codigo},
                 crossDomain : true,
+                mode: 'cors', 
                 xhrFields: {
                       withCredentials: true
                  },
+            
+
+
                  headers: {
-                    "Access-Control-Allow-Headers" : "Content-Type",
-                    "Access-Control-Allow-Origin": '*'
+                    "Access-Control-Allow-Headers" : "X-Requested-With, Content-Type, Accept",
+                    "Access-Control-Allow-Origin": '*',
+                    "Access-Control-Allow-Methods": 'GET, POST, PUT, DELETE'
                 },
               
                 success: function(res){
@@ -565,23 +642,15 @@ $("#guardarLocation").click(function(e){
                     alert(' Error in processing!');
                 }
             });
-            $.ajax({
-                headers: { 'Accept': 'application/json',
-                'Content-Type': 'application/json' 
-                },
-                'type': 'POST',
-                'url':  urlInsertPyl,
-                'data': JSON.stringify({
-                    'location':location
-                  }),
-                'dataType':'json',
-                'success': function(data) {
+    
            
-                },
-                'error': function(jqXHR, textStatus, errorThrown) {
-                    alert(' Error in processing python!');
-                }
+
+            pythonUrl(urlInsertPyl,{Location:location})
+            .then(data=>{
+              
             });
+
+
             $.ajax({
                 headers: { 'Accept': 'application/x-www-form-urlencoded',
                     'Content-Type': 'application/x-www-form-urlencoded' 
@@ -620,44 +689,52 @@ $("#guardarLocation").click(function(e){
             datos={
                
             }
-            $.ajax({
+            // $.ajax({
              
-                'method': 'PUT',
-                'url':  urlLocation, 
-                'data': JSON.stringify({ 
-                        'id':codigo,
-                        'location':location}),
-                'dataType':'json',
-                headers: { 'Accept': 'application/json',
-                'Content-Type': 'application/json' 
-                },
-                'success': function(data) {
-                alert('Has actualizado los datos de direccion');
-                },
-                'error': function(jqXHR, textStatus, errorThrown) {
+            //     'method': 'PUT',
+            //     'url':  urlLocation, 
+            //     'data': JSON.stringify({ 
+            //             'id':codigo,
+            //             'location':location}),
+            //     'dataType':'json',
+            //     headers: { 'Accept': 'application/json',
+            //     'Content-Type': 'application/json' 
+            //     },
+            //     'success': function(data) {
+            //     alert('Has actualizado los datos de direccion');
+            //     },
+            //     'error': function(jqXHR, textStatus, errorThrown) {
                    
-                    alert(' Error in processing!');
-                    console.log(JSON.stringify(datos));
-                }
-            });
-            $.ajax({
-                headers: { 'Accept': 'application/json',
-                'Content-Type': 'application/json' 
-                },
-                'method': 'PUT',
-                'url':  urlUpdatePyl,
-                'data': JSON.stringify({
-                    'id':codigo,
-                    'location':location
-                  }),
-                'dataType':'json',
-                'success': function(data) {
-                 alert('Has actualizado los datos en python');
-                },
-                'error': function(jqXHR, textStatus, errorThrown) {
-                    alert(' Error in processing python!');
-                }
-            });
+            //         alert(' Error in processing!');
+            //         console.log(JSON.stringify(datos));
+            //     }
+            // });
+            UpdatejavaUrl(urlLocation,
+                {
+                id:codigo,
+                location:location
+                }).then(data=>{
+                console.log(data);
+                alert('Datos enviados');
+                });
+            // $.ajax({
+            //     headers: { 'Accept': 'application/json',
+            //     'Content-Type': 'application/json' 
+            //     },
+            //     'method': 'PUT',
+            //     'url':  urlUpdatePyl,
+            //     'data': JSON.stringify({
+            //         'id':codigo,
+            //         'location':location
+            //       }),
+            //     'dataType':'json',
+            //     'success': function(data) {
+            //      alert('Has actualizado los datos en python');
+            //     },
+            //     'error': function(jqXHR, textStatus, errorThrown) {
+            //         alert(' Error in processing python!');
+            //     }
+            // });
            
             
 
@@ -804,27 +881,19 @@ $("#guardarBilling").click('submit', function(e){
                     alert(' Error in processing!');
                 }
             });
-            $.ajax({
-                headers: { 'Accept': 'application/json',
-                    'Content-Type': 'application/json' 
-                },
+            pythonUrl(urlInsertPyb,
+                {
+                    "id":codigo,
+                    "Description": description,
+                    "Debit": debit,
+                    "Credit": credit,
+                    "Date": "2021-04-27",
+                    "UserAccount": idusuario
+                }).then(data=>{
+                console.log(data);
+                alert('Datos enviados');
+                });
 
-                'type': 'POST',
-                'url':  urlInsertPyb,
-                'data': JSON.stringify({ 
-                                Description:description,
-                                UserAccount:idusuario,
-                                Debit:debit,
-                                Credit:credit,
-                    }),
-                'dataType':'json',
-                'success': function(data) {
-              
-                },
-                'error': function(jqXHR, textStatus, errorThrown) {
-                    alert(' Error in processing! python');
-                }
-            });
             $.ajax({
                 headers: { 'Accept': 'application/x-www-form-urlencoded',
                 'Content-Type': 'application/x-www-form-urlencoded' 
@@ -924,7 +993,6 @@ $("#guardarBilling").click('submit', function(e){
   }
 
 });
-
 
 //Eliminar Billing 
 $(document).on("click", ".eliminarbilling", function(e){	 
